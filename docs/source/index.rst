@@ -1,4 +1,4 @@
-Welcome to Lumache's documentation!
+WONS开发笔记
 ===================================
 
 **Lumache** (/lu'make/) is a Python library for cooks and food lovers
@@ -18,5 +18,6 @@ Contents
 
 .. toctree::
 
+   嵌入式
    usage
    api
