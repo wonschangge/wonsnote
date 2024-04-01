@@ -1,0 +1,44 @@
+版本管理工具
+==========
+
+asdf
+------------
+
+To use Lumache, first install it using pip:
+
+.. code-block:: console
+
+   #!/bin/bash
+
+   # Install dependencies
+   sudo apt update
+   sudo apt install curl git -y
+
+   # install python building dependencies
+   sudo apt install build-essential libssl-dev zlib1g-dev \
+   libbz2-dev libreadline-dev libsqlite3-dev curl \
+   libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev -y
+
+   # Clone asdf repository
+   git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.13.1
+
+   # Add asdf to bashrc
+   echo -e '\n. "$HOME/.asdf/asdf.sh"' >> ~/.bashrc
+
+   # Add asdf completions to bashrc
+   echo -e '\n. "$HOME/.asdf/completions/asdf.bash"' >> ~/.bashrc
+
+   # reload terminal
+   source "$HOME/.bashrc"
+
+   # Install Python plugin
+   asdf plugin add python https://github.com/danhper/asdf-python.git
+
+   # Install Python 3.10.13
+   asdf install python 3.10.13
+
+   # Set Python 3.10.13 as the global version
+   asdf global python 3.10.13
+
+
+asdf 安装好的工具在 /Users/mac/.asdf/shims 中，手动添加环境变量到 .zshrc 中。
