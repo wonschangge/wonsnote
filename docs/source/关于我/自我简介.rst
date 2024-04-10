@@ -2,3 +2,9 @@
 ========
 
 #TODO
+
+* Embedded Linux engineer/consultant
+
+* Linux kernel engineer
+
+* Trainer, Course Author for the Linux Foundation
