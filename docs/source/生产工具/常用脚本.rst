@@ -1,0 +1,26 @@
+常用脚本
+===========================================================
+
+检验函数是否存在，不在则输出错误提示并退出：
+
+::
+
+    type platform_check_image >/dev/null 2>/dev/null || {
+        echo "Firmware upgrade is not implemented for this platform." >&2
+        exit 1
+    }
+
+解析/proc/cmdline
+
+::
+
+    cmdline_get_var() {
+        local var=$1
+        local cmdlinevar tmp
+
+        for cmdlinevar in $(cat /proc/cmdline); do
+            tmp=${cmdlinevar##${var}}
+            [ "=" = "${tmp:0:1}" ] && echo ${tmp:1}
+        done
+    }
+    cmdline_get_var root

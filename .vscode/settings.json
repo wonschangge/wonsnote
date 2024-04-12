@@ -1,4 +1,6 @@
 {
     "sphinx-needs.needsJson": "${workspaceFolder}/needs_small.json",
     "sphinx-needs.srcDir": "${workspaceFolder}",
+    "esbonio.sphinx.confDir": "",
+    "svg.preview.background": "black",
 }

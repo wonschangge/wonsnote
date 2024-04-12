@@ -1,0 +1,17 @@
+启动流程
+=======================
+
+U-Boot为了支持各种Linux发行版，增加通用性，添加了 ``启动时脚本`` 的功能。
+
+参见：https://docs.u-boot.org/en/latest/develop/distro.html
+
+U-Boot对Script是逐步完善的。软件代码文件“include/config_distro_bootcmd.h”在2015.01就已经存在。文档文件“doc/develop/distro.rst”在2022.01里加入。
+
+业界对Script功能也逐步接受，目前很多芯片都都已经默认使能，比如AMD的MPSoC的U-Boot。
+
+如果不想使用Script功能，可以禁止选项CONFIG_DISTRO_DEFAULTS。
+
+U-Boot的启动命令
+-----------------
+
+没有人工参与的自动启动，或直接执行命令“boot”， U-Boot使用的启动命令都是“bootcmd”。

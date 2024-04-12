@@ -27,9 +27,7 @@ SD 卡将用于存储引导加载程序和根文件。所以，我们首先在�
 
 将 SD 读卡器插入 Linux PC 后，从dmesg或mount找到其设备名称。
 
-.. highlight:: sh
-
-::
+.. code::sh
 
 
    $ dmesg | tail
@@ -49,9 +47,7 @@ SD 卡将用于存储引导加载程序和根文件。所以，我们首先在�
 2.2 删除现有分区
 ------------------------------------
 
-.. highlight:: sh
-
-::
+.. code::sh
    
    $ sudo fdisk /dev/sdb
    Welcome to fdisk (util-linux 2.34).
@@ -89,9 +85,7 @@ SD 卡将用于存储引导加载程序和根文件。所以，我们首先在�
 添加一个 100MB 的boot分区和一个剩余大小的root分区。
 
 
-.. highlight:: sh
-
-::
+.. code::sh
 
 
    $ sudo fdisk /dev/sdb
@@ -165,9 +159,7 @@ SD 卡将用于存储引导加载程序和根文件。所以，我们首先在�
 2.4 格式化分区
 ------------------------------------
 
-.. highlight:: sh
-
-::
+.. code::sh
    
    # FAT32 for boot partition
    $ sudo mkfs.vfat -F 32 -n boot /dev/sdb1
@@ -181,9 +173,7 @@ SD 卡将用于存储引导加载程序和根文件。所以，我们首先在�
 
 挂载两个分区，以便我们可以写入它们。
 
-.. highlight:: sh
-
-::
+.. code::sh
    
 
    $ sudo mount /dev/sdb1 /mnt/boot
@@ -207,9 +197,7 @@ SD 卡将用于存储引导加载程序和根文件。所以，我们首先在�
 3.1 下载crosstool-NG源码
 ------------------------------------
 
-.. highlight:: sh
-
-::
+.. code::sh
    
    $ git clone https://github.com/crosstool-ng/crosstool-ng
    $ cd crosstool-ng/
@@ -222,9 +210,7 @@ SD 卡将用于存储引导加载程序和根文件。所以，我们首先在�
 
 安装 crosstool-NG 的完整文档可以[在这里找到](https://crosstool-ng.github.io/docs/install/)。
 
-.. highlight:: sh
-
-::
+.. code::sh
    
 
    $ ./bootstrap
@@ -240,18 +226,14 @@ SD 卡将用于存储引导加载程序和根文件。所以，我们首先在�
 
 在用crosstool-NG于构建工具链之前，我们需要首先对其进行配置。配置器的工作方式与配置 Linux 内核相同。
 
-.. highlight:: sh
-
-::
+.. code::sh
    
    $ ct-ng menuconfig
 
 
 还有一些示例配置，我们可以通过ct-ng list-samples命令获取。我们可以使用其中之一，然后使用ct-ng menuconfig。这里 我将不加修改地使用 aarch64-rpi4-linux-gnu。
 
-.. highlight:: sh
-
-::
+.. code::sh
    
 
    # Basic information about this config
@@ -277,9 +259,7 @@ SD 卡将用于存储引导加载程序和根文件。所以，我们首先在�
 
 要构建工具链，只需运行：
 
-.. highlight:: sh
-
-::
+.. code::sh
 
 
    $ ct-ng build
@@ -301,9 +281,7 @@ SD 卡将用于存储引导加载程序和根文件。所以，我们首先在�
 4.1 下载u-boot源码
 ------------------------------------
 
-.. highlight:: sh
-
-::
+.. code::sh
 
 
    $ git clone git://git.denx.de/u-boot.git
@@ -316,9 +294,7 @@ SD 卡将用于存储引导加载程序和根文件。所以，我们首先在�
 
 因为引导加载程序是特定于设备的，所以我们需要在构建它之前对其进行配置。与 crosstool-NG类似，有几个位于configs/下的 sample/default 配置。我们可以在configs/rpi_4_defconfig下 找到一个用于Raspberry Pi 4的。那么我们只需要运行 make rpi_4_defconfig。在此之前，我们还需要设置 CROSS_COMPILE 环境变量。
 
-.. highlight:: sh
-
-::
+.. code::sh
 
 
    $ export PATH=${HOME}/x-tools/aarch64-rpi4-linux-gnu/bin/:$PATH
@@ -329,9 +305,7 @@ SD 卡将用于存储引导加载程序和根文件。所以，我们首先在�
 4.3 构建u-boot
 ------------------------------------
 
-.. highlight:: sh
-
-::
+.. code::sh
 
 
    $ make
@@ -342,9 +316,7 @@ SD 卡将用于存储引导加载程序和根文件。所以，我们首先在�
 
 我们只需要将最后一步编译的二进制文件 u-boot.bin 复制到 SD 卡上的 boot 分区中即可。
 
-.. highlight:: sh
-
-::
+.. code::sh
 
    
    $ sudo cp u-boot.bin /mnt/boot
@@ -356,9 +328,7 @@ SD 卡将用于存储引导加载程序和根文件。所以，我们首先在�
 
 再手动写一份 config.txt:
 
-.. highlight:: sh
-
-::
+.. code::sh
 
    # Let Raspberry Pi 4 bootloader load u-boot
    $ cat << EOF > config.txt
@@ -385,9 +355,7 @@ SD 卡将用于存储引导加载程序和根文件。所以，我们首先在�
 
 虽然原来的 Linux 内核应该可以工作，但使用 Raspberry Pi 的分支 更稳定。另请注意，内核版本必须高于 为工具链配置的内核版本。
 
-.. highlight:: sh
-
-::
+.. code::sh
 
    $ git clone --depth=1 -b rpi-5.10.y https://github.com/raspberrypi/linux.git
    $ cd linux
@@ -398,9 +366,7 @@ SD 卡将用于存储引导加载程序和根文件。所以，我们首先在�
 
 我们只使用 Raspberry Pi 4 的默认配置。有关 Raspberry Pi 4 型号 b 规格，请参阅[此处](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/specifications/)。
 
-.. highlight:: sh
-
-::
+.. code::sh
 
    $ make ARCH=arm64 CROSS_COMPILE=aarch64-rpi4-linux-gnu- bcm2711_defconfig
    $ make -j$(nproc) ARCH=arm64 CROSS_COMPILE=aarch64-rpi4-linux-gnu-
@@ -411,9 +377,7 @@ SD 卡将用于存储引导加载程序和根文件。所以，我们首先在�
 
 现在我们将内核映像和设备树二进制文(`*.dtb`)复制到SD卡上的boot分区中。
 
-.. highlight:: sh
-
-::
+.. code::sh
 
    $ sudo cp arch/arm64/boot/Image /mnt/boot
    $ sudo cp arch/arm64/boot/dts/broadcom/bcm2711-rpi-4-b.dtb /mnt/boot/
@@ -427,9 +391,7 @@ SD 卡将用于存储引导加载程序和根文件。所以，我们首先在�
 6.1 创建目录
 ------------------------------------
 
-.. highlight:: sh
-
-::
+.. code::sh
 
    $ mkdir rootfs
    $ cd rootfs
@@ -471,9 +433,7 @@ SD 卡将用于存储引导加载程序和根文件。所以，我们首先在�
 
 我们将 Busybox 用于基本的 Linux 实用程序，例如 shell。所以，我们需要 将其安装到刚刚创建的rootfs目录中。
 
-.. highlight:: sh
-
-::
+.. code::sh
 
    # Download the source code
    $ wget https://busybox.net/downloads/busybox-1.33.2.tar.bz2
@@ -499,9 +459,7 @@ SD 卡将用于存储引导加载程序和根文件。所以，我们首先在�
 
 接下来，我们安装一些 Busybox 需要的共享库。我们可以找到那些库：
 
-.. highlight:: sh
-
-::
+.. code::sh
 
    $ readelf -a ~/rootfs/bin/busybox | grep -E "(program interpreter)|(Shared library)"
          [Requesting program interpreter: /lib/ld-linux-aarch64.so.1]
@@ -512,9 +470,7 @@ SD 卡将用于存储引导加载程序和根文件。所以，我们首先在�
 
 我们需要将这些文件从工具链的sysroot目录复制到rootfs/lib目录。
 
-.. highlight:: sh
-
-::
+.. code::sh
 
    $ export SYSROOT=$(aarch64-rpi4-linux-gnu-gcc -print-sysroot)
    $ sudo cp -L ${SYSROOT}/lib64/{ld-linux-aarch64.so.1,libm.so.6,libresolv.so.2,libc.so.6} ~/rootfs/lib64/
@@ -525,9 +481,7 @@ SD 卡将用于存储引导加载程序和根文件。所以，我们首先在�
 
 Busybox 需要两个设备节点。
 
-.. highlight:: sh
-
-::
+.. code::sh
 
    $ cd ~/rootfs
    $ sudo mknod -m 666 dev/null c 1 3
@@ -556,9 +510,7 @@ Busybox 需要两个设备节点。
 
 initramfs 是一个压缩的存档，它是一个旧的 Unix 存档 格式类似于 和 。cpiotarzip
 
-.. highlight:: sh
-
-::
+.. code::sh
 
    $ cd ~/rootfs
    $ find . | cpio -H newc -ov --owner root:root -F ../initramfs.cpio
@@ -575,9 +527,7 @@ initramfs 是一个压缩的存档，它是一个旧的 Unix 存档 格式类似
 
 我们需要配置 u-boot，以便它可以通过正确的内核 命令行和设备树二进制到内核。为简单起见，我将使用 Busybox shell 作为init程序。在现实生活中，如果使用 initramfs，那么 init 程序应负责挂载永久根目录文件系统。
 
-.. highlight:: sh
-
-::
+.. code::sh
 
    $ cat << EOF > boot_cmd.txt
    fatload mmc 0:1 \${kernel_addr_r} Image
@@ -605,9 +555,7 @@ initramfs 是一个压缩的存档，它是一个旧的 Unix 存档 格式类似
 
 最后，所有四个组件都准备就绪。我们现在可以尝试启动它。靴子 分区现在包含以下文件：
 
-.. highlight:: sh
-
-::
+.. code::sh
 
    $ tree /mnt/boot/
    /mnt/boot/
@@ -625,9 +573,7 @@ initramfs 是一个压缩的存档，它是一个旧的 Unix 存档 格式类似
 
 现在我们卸载分区并将 SD 卡插入 Raspberry Pi 4。
 
-.. highlight:: sh
-
-::
+.. code::sh
 
    $ sudo umount /dev/sdb1
    $ sudo umount /dev/sdb2
@@ -645,9 +591,7 @@ initramfs 是一个压缩的存档，它是一个旧的 Unix 存档 格式类似
 
 将 SD 卡插入读卡器，然后将读卡器插入 Linux 桌面。
 
-.. highlight:: sh
-
-::
+.. code::sh
 
    $ sudo mount /dev/sdb1 /mnt/boot
    $ sudo mount /dev/sdb2 /mnt/root
@@ -659,9 +603,7 @@ initramfs 是一个压缩的存档，它是一个旧的 Unix 存档 格式类似
 
 我们不再需要 initramfs。
 
-.. highlight:: sh
-
-::
+.. code::sh
 
    $ cat << EOF > boot_cmd.txt
    fatload mmc 0:1 \${kernel_addr_r} Image
@@ -680,9 +622,7 @@ initramfs 是一个压缩的存档，它是一个旧的 Unix 存档 格式类似
 
 现在我们卸载分区并将 SD 卡插入 Raspberry Pi 4。
 
-.. highlight:: sh
-
-::
+.. code::sh
 
    $ sudo umount /dev/sdb1
    $ sudo umount /dev/sdb2
@@ -692,9 +632,7 @@ initramfs 是一个压缩的存档，它是一个旧的 Unix 存档 格式类似
 
 如下是我的 rootfs 方式下的 U-Boot 串口启动日志：
 
-.. highlight:: sh
-
-::
+.. code::sh
 
    欢迎使用 minicom 2.8
 

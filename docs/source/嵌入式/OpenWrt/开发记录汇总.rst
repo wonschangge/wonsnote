@@ -1,0 +1,280 @@
+开发记录汇总
+============================
+
+为什么OpenWrt中的分区工具使用firmware-tools/src/ptgen.c，而不是类似buildroot/package/genimage这种便捷工具？
+
+.. _genimage support讨论: https://www.mail-archive.com/openwrt-devel@lists.openwrt.org/msg40918.html
+
+论坛中的 `genimage support讨论`_:
+
+::
+
+    >> Some embedded Linux distributions like Buildroot provide genimage as
+    >> a host package, that can be then used to create bootable SD card images
+    >> or complete images for flash devices.
+    >>
+    >> genimage requires libconfuse, hence the first patch adds this library.
+    >>
+    >> One question remains. When should genimage be compiled? As it can be
+    >> used for almost any device/architecture I'd suggest to add it to the
+    >> general tools-y target.
+    > To me it does not seem very useful. It doesn't do much by itself other
+    > than create a partition table (for which we have ptgen) and call the
+    > utilities like genext2fs (which we obsoleted and replaced with
+    > make_ext4fs) or the mtd/ubi utilites, while in a way also limiting
+    > control over the command line parameters.
+    >
+    > I don't think we should start using this.
+
+原因总结：大家定位不同，OpenWrt中的ptgen.c包含MBR和GPT分区协议头写入，提供了细粒度的控制，使用了更新的 make_ext4fs。
+    相比之家，genimage 只是一个托盘工具，本身并没实现什么实质功能。
+
+
+
+
+mmcblk0 fdisk:
+
+```
+Disk /dev/mmcblk0：29.72 GiB，31914983424 字节，62333952 个扇区
+单元：扇区 / 1 * 512 = 512 字节
+扇区大小(逻辑/物理)：512 字节 / 512 字节
+I/O 大小(最小/最佳)：512 字节 / 512 字节
+磁盘标签类型：dos
+磁盘标识符：0xb54a2dfe
+设备           启动    起点     末尾     扇区  大小 Id 类型
+/dev/mmcblk0p1         2048 62332927 62330880 29.7G  5 扩展
+/dev/mmcblk0p5         6144  2103295  2097152    1G 83 Linux
+/dev/mmcblk0p6      2105344  4202495  2097152    1G 83 Linux
+```
+
+---
+
+mmcblk0
+
+```
+$ sudo hexdump /dev/mmcblk0 | head -n 20
+0000000 b8fa 1000 d08e 00bc b8b0 0000 d88e c08e
+0000010 befb 7c00 00bf b906 0200 a4f3 21ea 0006
+0000020 be00 07be 0438 0b75 c683 8110 fefe 7507
+0000030 ebf3 b416 b002 bb01 7c00 80b2 748a 8b01
+0000040 024c 13cd 00ea 007c eb00 00fe 0000 0000
+0000050 0000 0000 0000 0000 0000 0000 0000 0000
+*
+00001b0 0000 0000 0000 0000 2dfe b54a 0000 0400
+00001c0 0401 fe05 ffc2 0800 0000 1800 03b7 0000
+00001d0 0000 0000 0000 0000 0000 0000 0000 0000
+*
+00001f0 0000 0000 0000 0000 0000 0000 0000 aa55
+```
+
+前446字节(000~1b0行): (0x1b+1)*16 - 2
+紧接64字节:
+
+```
+00001b0 0000 0000 0000 0000 0000 0000 0000 0400
+00001c0 0401 fe05 ffc2 0800 0000 1800 03b7 0000
+00001d0 0000 0000 0000 0000 0000 0000 0000 0000
+00001e0 0000 0000 0000 0000 0000 0000 0000 0000
+00001f0 0000 0000 0000 0000 0000 0000 0000 aa55
+```
+
+只存在主分区1: 0400 0401 fe05 ffc2 0800 0000 1800 03b7
+低位转换并关联对应意义划分: 
+
+(00) (04 01 04) (05) (fe c2 ff) (00 08 00 00) (00 18 b7 03)
+
+- 引导标志：00代表未激活，80代表激活
+- 分区开始的磁头号：04
+- 分区开始的扇区号：01
+- 分区开始的柱面号：04
+- 分区系统类型：05(扩展)，其他常用如0b(FAT32)、04(FAT16)、07(NTFS)
+- 分区结束的磁头号：fe
+- 分区结束的扇区号：c2
+- 分区结束的柱面号：7
+- 首扇区的相对扇区号：0x080000=524288, 524288/256=2048
+- 总扇区数：0x18b703=1619715
+
+
+扇区开始与CHS的映射关系（参考ptgen.c中的to_chs函数反推）：
+
+```c
+static void to_chs(long sect, unsigned char chs[3])
+{
+	int c,h,s;
+
+	s = (sect % sectors) + 1; // sect=start+len
+	sect = sect / sectors;
+	h = sect % heads;
+	sect = sect / heads;
+	c = sect;
+
+	chs[0] = h;
+	chs[1] = s | ((c >> 2) & 0xC0);
+	chs[2] = c & 0xFF;
+
+	return;
+}
+```
+
+---
+
+mmcblk0p5
+
+```
+0000000 0000 0000 0000 0000 0000 0000 0000 0000
+*
+00001b0 0000 0000 0000 0000 0000 0000 0000 0c00
+00001c0 0c01 fe83 ffc2 1000 0000 0000 0020 fe00
+00001d0 ffc2 fe05 ffc2 17c0 0020 0040 0020 0000
+00001e0 0000 0000 0000 0000 0000 0000 0000 0000
+00001f0 0000 0000 0000 0000 0000 0000 0000 aa55
+```
+
+前446字节(000~1b0行): (0x1b+1)*16 - 2
+紧接64字节:
+
+```
+00001b0                                    0c00
+00001c0 0c01 fe83 ffc2 1000 0000 0000 0020 fe00
+00001d0 ffc2 fe05 ffc2 17c0 0020 0040 0020 0000
+00001e0 0000 0000 0000 0000 0000 0000 0000 0000
+00001f0 0000 0000 0000 0000 0000 0000 0000
+```
+
+EBR分区1: (00) (0c 01 0c) (83) (fe c2 ff) (00 01 00 00) (00 00 20 00)
+EBR分区2: (00) (fe c2 ff) (05) (fe c2 ff) (c0 17 20 00) (40 00 20 00)
+
+
+
+
+MBR记录的示例：
+
+(80)(01 01 00)(0B) FE BF FC, 3F 00 00 00, 7E 86 BB 00
+
+- 80 引导标志：激活
+- 01 分区开始的磁头号：01
+- 01 分区开始的扇区号：01
+- 00 分区开始的柱面号：00
+- 0B 分区系统类型：FAT32，其他常用如04(FAT16)、07(NTFS)
+- FE 分区结束的磁头号：254
+- BF 分区结束的扇区号：63
+- FC 分区结束的柱面号：764
+- 3F 00 00 00 首扇区的相对扇区号：63
+- 7E 86 BB 00 总扇区数：12289622。
+
+可以看到，在只分配64字节给DPT的情况下，每个分区项分别占用16个字节，因此只能记录四个分区信息，尽管后来为了支持更多的分区，引入了扩展分区及逻辑分区的概念。但每个分区项仍然用16个字节存储。能表示的最大扇区数为FF FF,FF FFH，因此可管理的最大空间=总扇区数*扇区大小（512byte），也就是2TB（由于硬盘制造商采用1:1000进行单位换算，因此也有2.2TB一说，别怪他们，他们不是程序员）。超过2TB以后的空间，不能分配地址，自然也就无法管理了。
+
+MBR的诸多缺点使其应用大大受限。硬盘技术日新月异，硬盘容量突飞猛进（希捷将于今年开卖60TB 固态硬盘），多出来的硬盘空间总不能晾着吧，于是，在刚诞生的UEFI规范下一起研发了新技术。
+
+
+---
+
+wons@t14:~/WORK_DIR/test$ ./burn-mbr-ext.sh 
+nr = 4
+before align: start = 32256
+after align: start = 1048576
+align: sect = 2097152
+no align: sect = 2097152
+Partition 0: start=1048576, end=2097152, size=1048576
+1048576
+1048576
+before align: start = 2129408
+after align: start = 3145728
+align: sect = 5242880
+no align: sect = 5242880
+Partition 1: start=3145728, end=5242880, size=2097152
+3145728
+2097152
+before align: start = 5275136
+after align: start = 6291456
+align: sect = 9437184
+no align: sect = 9437184
+Partition 2: start=6291456, end=9437184, size=3145728
+6291456
+3145728
+before align: start = 9469440
+after align: start = 10485760
+align: sect = 23068672
+no align: sect = 23068672
+Partition 3: start=10485760, end=23068672, size=12582912
+10485760
+12582912
+use_mbr_extended_partition
+ext start = 20543
+before align: start = 10518016
+after align: start = 11534336
+align: sect = 22020096
+no align: sect = 22020096
+start = 22528, end = 43007
+Partition 4: start=11534336, end=22020096, size=10485760
+11534336
+10485760
+sizeof(struct pte) * 4 = 64
+wons@t14:~/WORK_DIR/test$ fdisk mbr-ext.img 
+
+Welcome to fdisk (util-linux 2.37.2).
+Changes will remain in memory only, until you decide to write them.
+Be careful before using the write command.
+
+
+Command (m for help): p
+Disk mbr-ext.img: 10 MiB, 10486272 bytes, 20481 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x5452574f
+
+Device       Boot Start   End Sectors Size Id Type
+mbr-ext.img1 *     2048  4095    2048   1M  c W95 FAT32 (LBA)
+mbr-ext.img2       6144 10239    4096   2M  c W95 FAT32 (LBA)
+mbr-ext.img3      12288 18431    6144   3M  c W95 FAT32 (LBA)
+mbr-ext.img4      20480 45055   24576  12M  5 Extended
+mbr-ext.img5      43008 63487   20480  10M  c W95 FAT32 (LBA)
+
+Command (m for help): q
+
+wons@t14:~/WORK_DIR/test$ hexdump 
+burn-gpt.sh        burn-mbr-ext.sh    burn-mbr.sh        burn.sh            diffBootAB         firmware-utils/    mbr-ext.img        my-firmware-utils/ test-gpt.img       test.img           .vscode/           
+wons@t14:~/WORK_DIR/test$ hexdump mbr-ext.img 
+0000000 0000 0000 0000 0000 0000 0000 0000 0000
+*
+00001b0 0000 0000 0000 0000 574f 5452 0000 0080
+00001c0 0821 010c 1001 0800 0000 0800 0000 0100
+00001d0 1822 020c 2822 1800 0000 1000 0000 0300
+00001e0 3004 000c 4924 3000 0000 1800 0000 0100
+00001f0 5106 0305 b20b 5000 0000 6000 0000 aa55
+0000200 0000 0000 0000 0000 0000 0000 0000 0000
+*
+0a001b0 0000 0000 0000 0000 0000 0000 0000 0100
+0a001c0 5926 020c aa2a 5800 0000 5000 0000 0000
+0a001d0 0000 0000 0000 0000 0000 0000 0000 0000
+*
+0a001f0 0000 0000 0000 0000 0000 0000 0000 aa55
+
+
+0100 5106 0305 b20b 5000 0000 6000 0000 
+(00)(01 06 51)(05)(03 0b b2)(00 50 00 00)(00 60 00 00)
+0x500000=5242880, 5242880/256=20480
+
+0100 5926 020c aa2a           58000000        50000000
+(00)(01 26 59)(0c)(02 2a aa)(00 58 00 00)(00 50 00 00)
+01表示..
+(00 59 26)
+02表示..
+(58 00 00 00)表示起始扇区 0x00580000 = 2952790016
+(50 00 00 00)表示分区大小 0x00500000 = 5242880 = 10240 * 512 = 10M
+
+8001 0100 07FE FFFF  3F00 0000 36C1 C008
+(80) (01 01 00) (07) (FE FF FF) (3F 00 00 00) (36 C1 C0 08)
+80表示激活，
+(01 01 00)起始的柱面、磁头和扇区号，
+文件系统为07表示NTFS的，
+(FE FF FF)表示结束的柱面、磁头和扇区(分区已经超过8G了，这个数据就无效了)，
+(3F 00 00 00)表示分区的起始扇区LBA为0x0000003F(注意是小端)，
+(36 C1 C0 08)表示当前分区大小为0x08C0C136
+
+
+pte[3].start * 512;
+
+pte[3].start * 512 + 
