@@ -1,11 +1,8 @@
 Linux内核
 =====================
 
-
-
 .. image::
     res/linux-kernel-in-the-system.svg
-
 
 Linux内核的主要角色：
 
@@ -22,7 +19,7 @@ Linux内核的主要角色：
     * 如：文件和设备操作、网络操作、进程间通信、进程管理、内存映射、定时器、线程、同步指令...
 * 系统调用接口由C库包装，用户空间应用通常从来不会直接进行系统调用，而是使用相应的C库函数
 
-.. images::
+.. image::
     res/Linux_kernel_interfaces.svg
 
 

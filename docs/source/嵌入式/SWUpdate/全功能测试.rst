@@ -1,0 +1,276 @@
+全功能测试
+===========================================================
+
+功能集设计：
+
+1. 最基础的更新流程
+
+1. 本地终端更新进度显示
+
+2. 本地其他进程下载镜像，调用swupdate-client更新
+
+3. 通过Web应用进行本地更新
+
+4. 
+
+
+
+已测试功能：
+
+
+
+
+
+swupdate
+
+swupdate-client
+
+client程序使用 IPC 将镜像转发到正在运行的 SWUpdate 实例。
+如果更新包 (SWU) 是由 SWUpdate 外部的另一个应用程序下载的，则可以使用它。
+
+使用方式： swupdate-client [参数] <要安装的 image.swu>...
+
+参数包括：
+
+* -d 要求服务器仅执行试运行
+
+* -e <software>,<mode> 选择软件镜像集和来源（例如：stable、main）
+
+* -s <path> 如果未采用默认值，则进程 IPC 套接字的路径
+  
+* -v 详细信息
+
+* -q 安静
+  
+* -h 帮助
+
+swupdate-progress
+
+progress程序尝试连接到正在运行的 SWUpdate 实例以获取正在运行的更新的状态。
+它在标准输出上显示一个简单的条形图，其中包含当前更新的百分比指示并报告更新的结果。
+它可以选择驱动“psplash”或在更新后执行脚本。
+
+参数包括：
+
+* -c 使用颜色在标准输出上显示结果
+
+* -e 更新后执行的命令
+
+* -r 成功更新后可选择重新启动目标
+
+* -w 等待 SWUpdate 连接而不是错误退出
+
+* -p 发送百分比到 psplash
+
+* -s 如果未采用默认值，则进程 IPC 套接字的路径
+
+* -q 不打印进度块
+
+* -h 帮助
+
+swupdate-ipc
+
+ipc程序向 SWUpdate 发送特定命令，功能包括：
+
+1. 向 SWUpdate 发送新的 aes 密钥
+
+2. 发送一系列可以接受的版本。
+
+3. 返回 Hawkbit 的连接状态。
+
+4. 将数据发送到 Hawkbit 服务器。典型的用例是在安装新软件后由应用程序或操作员确认激活。该工具可以将激活结果转发到 hawkBit 服务器。
+
+5. 网络更新后发送重启命令
+
+功能-增量更新
+
+主要作用：减少下载的数据大小
+
+主要原理：通过差分方法仅下载差异部分
+
+SWUpdate的差分算法集成选型：
+
+* Delta编码大类：
+
+    1. librsync，SWUpdate通过rdiff handler支持librsync作为增量编码器
+
+    2. Zchunk
+
+SWUpdate增量更新
+
+1. SWUpdate 选择 zchunk 作为增量更新的格式
+
+2. SWUpdate 提取 ZCK 的标头并将其添加到 SWU
+
+3. ZCK文件被签名作为 SWU 的一部分，也可验证从外部加载的块
+
+为 SWUpdate 创建 ZCK 标头和 ZCK 文件示例：
+
+::
+    
+    zck --output <output file> -u --chunk-hash-type sha256 <artifact, like rootfs>
+
+
+
+
+
+Bootloader支持
+-----------------------------------------------------------
+
+在此，仅关注 U-Boot 部分。
+
+U-Boot 的运行时支持依赖U-Boot相关的“环境修改共享库”。
+因此，即使编译了对U-Boot的支持，其共享库也必须在运行时存在于目标系统上并可加载，以便使用此引导加载程序接口实现。
+
+可支持的场景：发行版发送通用 SWUpdate 包，下游集成商只需提供其环境修改共享库即可将该通用包与U-Boot结合进行更新。
+
+
+Lua支持
+-----------------------------------------------------------
+
+SWUpdate通常与操作其的语言无关，因为SWUpdate基于套接字控制，所以只要对应语言有套接字支持，就可操作SWUpdate.
+
+官方提供了Lua语言绑定的支持，lua_swupdate.so.0.1提供Lua模块lua_swupdate。
+
+其有3部分接口：
+
+1. 控制接口 - 提供 connect、write、close 方法
+
+2. 进度接口 - 提供 connect、receive、close方法
+
+3. IPv4接口 - 快捷操作，返回表
+
+
+外部程序获取SWUpdate更新信息的支持
+-----------------------------------------------------------
+
+默认配置下，外部进程可向域套接字“/tmp/swupdateprog”发出 connect() 请求，将自身注册到 SWUpdate。
+
+SWUpdate 将在更新过程中发生任何更改后发送回一个帧，其中包含以下数据（请参阅 include/progress_ipc.h）：
+
+::
+
+    struct progress_msg {
+        unsigned int    magic;          /* Magic Number */
+        unsigned int    status;         /* Update Status (Running, Failure) */
+        unsigned int    dwl_percent;    /* % downloaded data */
+        unsigned long long dwl_bytes;   /* total of bytes to be downloaded */
+        unsigned int    nsteps;         /* No. total of steps */
+        unsigned int    cur_step;       /* Current step index */
+        unsigned int    cur_percent;    /* % in current step */
+        char            cur_image[256]; /* Name of image to be installed */
+        char            hnd_name[64];   /* Name of running handler */
+        sourcetype      source;         /* Interface that triggered the update */
+        unsigned int    infolen;        /* Len of data valid in info */
+        char            info[2048];     /* additional information about install */
+    };
+
+字段含义：
+
+* magic 尚未使用，可以添加它以简单验证框架。
+
+* status START、RUN、SUCCESS、FAILURE、DOWNLOAD、DONE值之一。
+
+* dwl_percent 当 status = DOWNLOAD 时下载数据的百分比。
+
+* dwl_bytes 要下载的字节总数。
+
+* nsteps 要运行的安装程序（处理程序）的总数。
+
+* cur_step 正在运行的处理程序的索引。范围为 1..nsteps
+
+* cur_percent 当前处理程序内完成的工作的百分比。这在更新慢速接口（例如慢速闪存）时非常有用，并发出已复制到目标的图像百分比的信号。
+
+* cur_image 当前正在安装的 sw-description 中的映像的名称。
+
+* hnd_name 报告正在运行的处理程序的名称。
+
+* source 触发更新的接口。
+
+* infolen info信息字段中的数据长度。
+
+* info 有关安装的附加信息。
+
+可将tools/swupdate-progress.c看作是进度客户端的示例，其在控制台上打印状态并驱动“psplash”在显示器上绘制进度条。
+
+
+Mongoose Web Server支持
+-----------------------------------------------------------
+
+以守护进程模式工作，提供 Web Server、Web UI、Web App。
+
+启动示例：
+
+::
+    
+    ./swupdate -l 5 -w '-r ./examples/www/v2 -p 8080' -p 'reboot'
+
+如何定制？
+
+修改 ./web-app。
+
+Suricatta轮询Server支持
+-----------------------------------------------------------
+
+以守护进程模式工作，定期轮询远程服务器以获取更新、下载和安装。
+
+安装成功后，它会重启，并根据当前Bootloader环境下的更新状态变量向服务器报告更新状态，确保重启后的持久存储。
+
+我们可通过一些“U-Boot脚本”或“U-Boot的bootcount特性”来更改该更新状态变量。
+
+例如，通过将其设置为在引导新刷新的根文件系统失败并且必须执行切回的情况下反映失败。
+
+启动示例：
+
+::
+
+    
+
+
+处理程序
+-----------------------------------------------------------
+
+解析器之类“镜像类型”和“处理程序”中间建立一个桥梁，它填充一个表，其中包含要安装的镜像列表及对应的处理程序，每个镜像可以有不同的安装程序。
+
+
+
+
+
+
+U-Boot bootcount机制启用
+
+官方文档：
+
+https://github.com/u-boot/u-boot/blob/master/doc/README.bootcount
+
+工作原理：
+
+允许检测多次失败的 Linux 启动尝试。
+
+上电复位后，bootcount变量被初始化为1，且每次重新启动都会将该值增加1.
+
+如果重启后，bootcount的新值超过bootlimit,然后代替标准引导操作，将执行备用引导操作 altbootcmd。
+
+如果环境中未定义变量bootlimit，则启动计数限制功能被禁用。
+
+如果已启用，但未定义altbootcmd，然后U-Boot将进入交互模式并保持该状态。
+
+启用位置：
+
+Device Drivers > Enable support for checking boot count limit
+
+计数设备分为：
+
+1. 通用默认启动计数器（存储在自己指定的SYS_BOOTCOUNT_ADDR上）
+
+2. EXT文件系统上的启动计数器（存储在文件上）
+
+3. 环境变量上的启动计数器（依托环境变量存储，需和upgrade_available搭配使用）
+
+4. 内存上的启动计数器
+
+5. Linux设备模型上的启动计数器（存储在 /chosen/u-boot,bootcount-device上）
+
+测试：
+
+启用通用默认启动计数器后，环境变量中多出两个值 bootcount 和 bootlimit

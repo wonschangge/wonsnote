@@ -698,7 +698,7 @@ fitImage示例：
                 type = "flat_dt";
                 arch = "arm";
                 compression = "none";
-                hash@1 {
+                hash@1 {打印
                     algo = "crc32";
                 };
             };

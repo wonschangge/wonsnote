@@ -13,8 +13,11 @@
 文件系统负责管理文件的存储和访问。
 
 .. toctree::
+    
+    OpenWrt/index.rst
     硬盘分区/index.rst
     U-Boot/index.rst
     微型Linux/index.rst
     总线/index.rst
+    树莓派/index.rst
     嵌入式Linux通识学习

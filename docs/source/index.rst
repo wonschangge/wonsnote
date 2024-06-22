@@ -15,7 +15,8 @@ WONS开发笔记
    :caption: 嵌入式
 
    嵌入式/index.rst
-   
+   嵌入式/针对嵌入式Linux设备如何选择软件更新装置
+   嵌入式/嵌入式Linux设备管理功能设计
 
 .. :titleonly:
 .. :numbered:

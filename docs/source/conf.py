@@ -2,9 +2,10 @@
 
 # -- Project information
 
-project = 'Lumache'
-copyright = '2021, Graziella'
-author = 'Graziella'
+project = 'WonsNote'
+copyright = '2024, Chanj Wons'
+author = 'Chanj Wons'
+language = 'zh_CN'
 
 release = '0.1'
 version = '0.1.0'
@@ -17,6 +18,8 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
     'sphinx.ext.intersphinx',
+    'sphinxcontrib.youtube', # youtube插件
+    'sphinxnotes.strike', # 删除线 :del:`` 或 ：strike:``
 ]
 
 intersphinx_mapping = {

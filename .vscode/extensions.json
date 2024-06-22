@@ -1,6 +1,7 @@
 {
     "recommendations": [
         "trond-snekvik.simple-rst",
-        "lextudio.restructuredtext"
+        "lextudio.restructuredtext",
+        "jock.svg"
     ]
 }

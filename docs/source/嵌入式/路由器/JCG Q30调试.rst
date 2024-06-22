@@ -3,9 +3,9 @@ JCG Q30调试
 
 串口连接设备后，内核日志打印太多，无法在控制台进行正常交互，暂时关闭内核日志打印：
 
-```shell
-echo 0 > /proc/sys/kernel/printk
-```
+.. code:: shell
+
+  echo 0 > /proc/sys/kernel/printk
 
 U-Boot内部基本信息
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -13,7 +13,7 @@ U-Boot内部基本信息
 version
 -----------------------------------------------------------
 
-.. code::shell
+.. code:: shell
 
   MT7981> version 
   U-Boot 2022.07-rc5 (Jul 18 2022 - 10:55:13 +0800)
@@ -21,10 +21,13 @@ version
   aarch64-linux-gnu-gcc (Ubuntu/Linaro 7.5.0-3ubuntu1~18.04) 7.5.0
   GNU ld (GNU Binutils for Ubuntu) 2.30
 
+
+
+
 mtd list
 -----------------------------------------------------------
 
-.. code::shell
+.. code:: shell
   
   MT7981> mtd list
   List of MTD devices:
@@ -55,7 +58,7 @@ mtd list
 printenv
 -----------------------------------------------------------
 
-.. code::shell
+.. code:: shell
   
   MT7981> printenv 
   baudrate=115200
@@ -93,7 +96,7 @@ Linux内部基本信息
 df
 -----------------------------------------------------------
 
-.. code::shell
+.. code:: shell
 
   root@AOS:/etc/config# df -h
   Filesystem                Size      Used Available Use% Mounted on
@@ -108,7 +111,7 @@ df
 mount
 -----------------------------------------------------------
 
-.. code::shell
+.. code:: shell
 
   root@AOS:/etc/config# mount
   /dev/root on /rom type squashfs (ro,relatime)
@@ -130,7 +133,7 @@ mount
 cat /proc/cpuinfo 
 -----------------------------------------------------------
 
-.. code::shell
+.. code:: shell
 
   root@AOS:/etc/config# cat /proc/cpuinfo 
   processor       : 0
@@ -158,7 +161,7 @@ cat /proc/cpuinfo
 uname -a
 -----------------------------------------------------------
 
-.. code::shell
+.. code:: shell
 
   root@AOS:/etc/config# uname -a
   Linux AOS 5.10.168 #0 SMP Mon Mar 11 02:29:14 2024 aarch64 GNU/Linux
@@ -169,7 +172,7 @@ uname -a
 uboot相关
 -----------------------------------------------------------
 
-.. code::shell
+.. code:: shell
 
   root@AOS:/sys/firmware/devicetree/base/chosen# cat name 
   chosen

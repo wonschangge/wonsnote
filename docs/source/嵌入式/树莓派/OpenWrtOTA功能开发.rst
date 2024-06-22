@@ -21,19 +21,20 @@ OTA功能实际开发（uboot A/B，boot A/B，rootfs A/B）
 
 3. 设置ab分区的启动方案，不同系统启动根据指定的dtb
 
-## 树莓派官方文档的A/B更新流程示例：
+树莓派官方文档的A/B更新流程示例
+-----------------------------------------------------------
 
 下面的伪代码展示了假设的操作系统`更新服务`如何使用 `tryboot_a_b`标识位 + `autoboot.txt` 来执行A/B系统升级。
 
-初始 `autoboot.txt`
+初始 `autoboot.txt`：
 
-```
-[all]
-tryboot_a_b=1
-boot_partition=2
-[tryboot]
-boot_partition=3
-```
+::
+  
+  [all]
+  tryboot_a_b=1
+  boot_partition=2
+  [tryboot]
+  boot_partition=3
 
 ### 安装更新[​](https://pidoc.cn/docs/computers/config-txt#%E5%AE%89%E8%A3%85%E6%9B%B4%E6%96%B0 "安装更新的直接链接")
 
@@ -155,7 +156,8 @@ int rpi_firmware_property_list(struct rpi_firmware *fw,
   
   - 将 /mnt/app 目录从 rootfs 中分离出，打包时被制成一个单独的文件映像。
 
-## 借鉴 buildroot_pi_swupdate 项目
+借鉴 buildroot_pi_swupdate 项目
+-----------------------------------------------------------
 
 弄清楚几点问题
 
@@ -163,39 +165,40 @@ int rpi_firmware_property_list(struct rpi_firmware *fw,
 
 该项目里的分区及分区文件系统的确定、生成、划分根据 buildroot 项目中定义的文件和格式来的，文件格式：genimage_swupdate.cfg
 
-```shell
-image persistent.vfat {
-    vfat {
-        extraargs="-F 32"
-        label = "Pesistent"
-        files = {
-            "autoboot.txt"
-        }
-        file id.device {
-            image = "persistent/id.device"
-        }
-    }
+::
 
-    size = 64M
-}
-...
-```
+  image persistent.vfat {
+      vfat {
+          extraargs="-F 32"
+          label = "Pesistent"
+          files = {
+              "autoboot.txt"
+          }
+          file id.device {
+              image = "persistent/id.device"
+          }
+      }
+
+      size = 64M
+  }
+  ...
 
 首先，openwrt 最开始确实是一个基于 buildroot 构建的 os，但后来 openwrt 为自身整套可自编译的源码做了大量修改，所以使用方式以及与 buildroot 相差较大。在对应的划定分区及系统也有较大差异，这是在 openwrt 上的示例，文件格式：gen_rpi_sdcard_img.sh
 
-```shell
-...
-set $(\
-    ptgen -o $OUTPUT -h $head -s $sect -l 4096 \
-        -t c -p ${BOOTFSSIZE}M \
-        -t 83 -p ${ROOTFSSIZE}M
-)
-...
-dd bs=512 if="$BOOTFS" of="$OUTPUT" seek="$BOOTOFFSET" conv=notrunc
-dd bs=512 if="$ROOTFS" of="$OUTPUT" seek="$ROOTFSOFFSET" conv=notrunc
-```
+::
 
-$ ./ptgen -o /tmp/test.img -h 4 -s 63 -l 1024 -t c -p 5M -t 83 -p 32M
+  ...
+  set $(\
+      ptgen -o $OUTPUT -h $head -s $sect -l 4096 \
+          -t c -p ${BOOTFSSIZE}M \
+          -t 83 -p ${ROOTFSSIZE}M
+  )
+  ...
+  dd bs=512 if="$BOOTFS" of="$OUTPUT" seek="$BOOTOFFSET" conv=notrunc
+  dd bs=512 if="$ROOTFS" of="$OUTPUT" seek="$ROOTFSOFFSET" conv=notrunc
+
+  $ ./ptgen -o /tmp/test.img -h 4 -s 63 -l 1024 -t c -p 5M -t 83 -p 32M
+
 
 由于MBR分区只支持4个主分区，无法满足persistent, boota, bootb, roota, rootb五个分区的要求，在查看 ptgen.c 源码后，可采用 GPT分区来完成支持。
 
@@ -225,7 +228,8 @@ MBR分区与GPT分区的差异：
 
 2. 增加支持 MBR 扩展分区的功能。
 
-### 其他：soc核间通信—MailBox
+其他：soc核间通信—MailBox
+-----------------------------------------------------------
 
 mailbox是多核soc上，核与核之间互相发中断的机制。由于核与核之间可能存在不同的业务，传统硬件上设计分配的有限数量的中断无法满足业务需求，导致软件拓展困难，所以可将mailbox视为可通过软件自定义的中断模块。
 

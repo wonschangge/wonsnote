@@ -24,12 +24,18 @@ bcm2710-rpi-3-b.dtb config.txt (full config) boot.scr uImage overlays/
 不清楚 DT 文件/config.txt 的工作方式及他们的使用时间（系统启动、内核启动等），是否可以用另一个文件覆盖初始 config.txt？
 
 树莓派有多种启动方法，但都归结为：
-1)找到并加载bootcode.bin
-3)加载start*.elf
-4)加载config.txt，从头开始 wrt config.txt
-5)加载内核（可以是U-boot)和cmdline.txt
-6)加载DTB和任何overlays
-7)启动内核固件
+
+1) 找到并加载bootcode.bin
+   
+2) 加载start*.elf
+
+3) 加载config.txt，从头开始 wrt config.txt
+   
+4) 加载内核（可以是U-boot)和cmdline.txt
+   
+5) 加载DTB和任何overlays
+   
+6) 启动内核固件
 
 仅识别FAT16/32/VFAT，因此加载来自其他文件系统（包括ext4）的数据必须由内核/U-boot完成。
 

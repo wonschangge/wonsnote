@@ -98,7 +98,7 @@
 
 * 参与社区工作
 
-    * 有可能与同行合作，并获得超越公司间间隙的机会。
+    * 有可能与同行合作，并获得超越公司间间隙的机会。http://localhost:37583/%E5%B5%8C%E5%85%A5%E5%BC%8F/U-Boot/index.html
 
 一些运行Linux的嵌入式系统例子：
 -----------------------------------------------------------
@@ -109,15 +109,13 @@
 4. 小车机器人
 5. 空间站（starlink、火箭、火星探测器）
 
-.. image::
+   * .. image:: res/Linux_on_Mars.png
+        :width: 200px
 
-    res/Linux_on_Mars.png
+   * .. image:: res/Linux_on_Mars_arch.png
+        :width: 400px
 
-.. image::
-
-    res/Linux_on_Mars_arch.png
-
-.. note:: See the Linux on Mars: How the Perseverance Rover and Ingenuity Helicopter Leveraged Linux to Accomplish their Mission presentation from Tim Canham (JPL, NASA): https://youtu.be/0_GfMcBmbCg?t=111
+   * .. note:: See the Linux on Mars: How the Perseverance Rover and Ingenuity Helicopter Leveraged Linux to Accomplish their Mission presentation from Tim Canham (JPL, NASA): https://youtu.be/0_GfMcBmbCg?t=111
 
 嵌入式Linux系统的硬件
 -----------------------------------------------------------
@@ -436,15 +434,14 @@ C/C++编译器
 
 .. note:: 更新内核不应该破坏你的程序，只要老工具链对项目有效，保留使用通常没有问题。
 
+CPIO卷和TAR卷的区别？
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tar适合打包文件和目录，提供可选的压缩，常用于备份和传输文件。
+cpio适合创建和解压缩initramfs、initrd等文件系统映像。
+
 C标准库
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 glibc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-
-
-
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-

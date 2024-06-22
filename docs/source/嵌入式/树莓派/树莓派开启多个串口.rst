@@ -1,0 +1,161 @@
+树莓派开启多个串口
+===========================================================
+
+内容参考： 
+
+1. `官方 UART 配置文档 <https://www.raspberrypi.com/documentation/computers/configuration.html#raspberry-pi-4-and-400>`_
+
+2. `论坛多串口的讨论 <https://www.raspberrypi.org/forums/viewtopic.php?t=244827#p1493698>`_
+
+树莓派4B上有2种类型的串口：UART-PL011 和 mini UART。
+
+树莓派5上只有1种类型的串口：UART-PL011。
+
+.. tip:: PL011是功能强大、广泛兼容16550的UART，mini UART的功能集较少。mini UART的FIFO较小，缺乏流量控制，在较高波特率下容易丢失字符。
+    
+具体来说，mini UART缺少：
+
+* 断线检测
+  
+* 帧错误检测
+  
+* 奇偶校验位
+  
+* 接收超时中断
+  
+* DCD、DSR、DTR或RI信号
+
+.. list-table:: 树莓派4B的串口类型表(共6个)
+    :widths: 15 15
+    :header-rows: 1
+
+    * - 串口名
+      - 类型
+    * - UART0
+      - PL011
+    * - UART1
+      - mini UART
+    * - UART2
+      - PL011
+    * - UART3
+      - PL011
+    * - UART4
+      - PL011
+    * - UART5
+      - PL011
+  
+树莓派4B在默认情况下，启用主串口和辅助串口，禁用另4个PL011(UART2~UART5)。
+
+树莓派4B的主串口（Primary/console UART）是UART1，位于 GPIO14(引脚8) 和 GPIO15(引脚10) 上。
+
+树莓派4B的辅助串口（Secondary/Bluetooth UART）是UART0，辅助串口通常不存在GPIO连接器上，默认其连到无线LAN/蓝牙控制器上。
+
+树莓派对应的串口Linux设备如下：
+
+.. list-table:: 树莓派串口Linux设备及描述
+    :widths: 15 15
+    :header-rows: 1
+
+    * - Linux设备
+      - 描述
+    * - /dev/ttyS0
+      - mini UART
+    * - /dev/ttyAMA0
+      - PL011(UART0)
+    * - /dev/serial0
+      - Primary UART
+    * - /dev/serial1
+      - Secondary UART
+
+主串口
+在 Raspberry Pi 上，选择一个 UART 出现在 GPIO 14（发送）和 15（接收）上 - 这是主 UART。默认情况下，这也是可能存在 Linux 控制台的 UART。请注意，GPIO 14 是 GPIO 接头上的引脚 8，而 GPIO 15 是引脚 10。
+
+在 Raspberry Pi 5 上，主 UART 显示在调试标头上。
+
+
+在树莓派OS上通常配置一个主串口（primary UART）和一个辅助串口（secondary UART）。
+
+
+disable-bt.dtbo overlay将禁用蓝牙设备中，并使第1个PL011（UART0）成为主UART。
+
+miniuart-bt.dtbo overlay将蓝牙功能切换为使用mini UART，并使第1个PL011（UART0）成为主UART。但这可能会降低最大可用波特率
+
+
+1. enable_uart=0时，启用 mini 串口为主串口
+
+2. enable_uart=1时，启用PL011(UART0)为主串口
+
+也就是说，enable_uart可以交换主/辅串口映射关系
+
+
+dtoverlay查看：
+
+* 展示所有串口 dtoverlay -a | grep uart
+
+* 查看特定串口信息 dtoverlay -h uart2
+
+* 查看主/辅串口映射 ls /dev -al
+
+要在 UART 上创建控制台，请将“console=ttyAMAn,115200”添加到 /boot/cmdline.txt，其中 n 是一个小整数 - 在 /dev 中查找以获取正确的数字。
+
+所有 4 个额外的 UART 都可以同时使用，只要它们的引脚不与您需要的其他东西冲突。
+
+默认内核命令行包括 console=serial0，固件根据需要将其转换为 ttyAMA0 或 ttyS0。
+
+我认为在所有启用的 UART 上自动创建控制台并不合适 - 许多人希望将它们用于其他用途。
+
+开启剩余串口：
+
+::
+
+    每个叠加层（overlay）都需要一个 dtoverlay=。该行上的任何其他内容都被视为参数。
+    注意，如果引脚正被其他设备（例如 UART0、UART1 或 I2C 端口之一）使用，内核将拒绝启用 UART 的尝试，
+         或者甚至可能禁用其他设备，因此请确保您正在尝试执行的操作是可能的。
+    dtoverlay=uart2
+    dtoverlay=uart3
+    dtoverlay=uart4
+    dtoverlay=uart5
+
+    dtoverlay=uart3        # without flow control pins
+    dtoverlay=uart3,ctsrts # with flow control pins
+
+重启后检查是否生效:
+
+
+::
+
+    ls /dev/ttyAMA*
+    /dev/ttyAMA0 /dev/ttyAMA1 /dev/ttyAMA2 /dev/ttyAMA3 /dev/ttyAMA4
+
+各串口与GPIO的对应关系:
+
+.. list-table:: 树莓派4B各串口与GPIO的对应关系
+    :widths: 15 15 15 15
+    :header-rows: 1
+
+    * - 串口名
+      - tty名
+      - TXD
+      - RXD
+    * - UART0
+      - ttyAMA0
+      - TXD0 - GPIO14
+      - RXD0 - GPIO15
+    * - UART2
+      - ttyAMA1
+      - TXD2 - GPIO0 - 引脚27
+      - RXD2 - GPIO1 - 引脚28
+    * - UART3
+      - ttyAMA2
+      - TXD3 - GPIO4
+      - RXD3 - GPIO5
+    * - UART4
+      - ttyAMA3
+      - TXD4 - GPIO8
+      - RXD4 - GPIO9
+    * - UART5
+      - ttyAMA4
+      - TXD5 - GPIO12
+      - RXD5 - GPIO13
+
+.. note:: GPIO引脚的编号不是按数字顺序排列的。

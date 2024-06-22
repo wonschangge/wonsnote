@@ -1,0 +1,43 @@
+差分二进制文件模拟
+===========================================================
+
+利用bsdiff工具（自带bsdiff和bspatch bin），模拟对二进制文件差分的过程：
+
+::
+
+    #include <stdio.h>
+
+    int main()
+    {
+        printf("hello\n");
+        return 0;
+    }
+
+1. gcc -o hello1 hello.c
+
+2. 在hello.c中打印hello后面增加打印world
+
+3. gcc -o hello2 hello.c
+
+4. 生成diff二进制patch: bsdiff hello1 hello2 delta
+
+5. 检查delta文件: 
+   
+   ::
+
+        $ file delta 
+        delta: bsdiff(1) patch file6.
+
+6. 应用二进制patch: bspatch hello1 hello3 delta
+
+7. 检查效果:
+   
+    ::
+
+
+        $ chmod +x ./hello3
+        $ ./hello3
+        hello
+        world
+
+.. note:: 另见： [bsdiff算法原理解析](https://blog.csdn.net/cplasf2012/article/details/117769624)
