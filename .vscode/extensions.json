@@ -2,6 +2,32 @@
     "recommendations": [
         "trond-snekvik.simple-rst",
         "lextudio.restructuredtext",
-        "jock.svg"
+        "jock.svg",
+        "ms-vscode.cmake-tools",
+        "ms-vscode.cpptools-themes",
+        "ms-vscode.cpptools-extension-pack",
+        "hollowtree.vue-snippets",
+        "vue.volar",
+        "tomoki1207.pdf",
+        "vscode-icons-team.vscode-icons",
+        "qwert30830.tomato-clock",
+        "ms-python.debugpy",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "esbenp.prettier-vscode",
+        "shd101wyy.markdown-preview-enhanced",
+        "ms-vscode.makefile-tools",
+        "ms-vscode.live-server",
+        "ecmel.vscode-html-css",
+        "eamodio.gitlens",
+        "github.vscode-github-actions",
+        "tamasfe.even-better-toml",
+        "swyddfa.esbonio",
+        "dracula-theme.theme-dracula",
+        "plorefice.devicetree",
+        "twxs.cmake",
+        "ms-vscode.cpptools",
+        "rangav.vscode-thunder-client",
+        "james-yu.latex-workshop"
     ]
 }
