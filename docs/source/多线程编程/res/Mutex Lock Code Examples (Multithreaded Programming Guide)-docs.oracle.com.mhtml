@@ -1,0 +1,478 @@
+From: <Saved by Blink>
+Snapshot-Content-Location: https://docs.oracle.com/cd/E19455-01/806-5257/sync-12/index.html
+Subject: Mutex Lock Code Examples (Multithreaded Programming Guide)
+Date: Tue, 25 Jun 2024 14:49:17 +0800
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----MultipartBoundary--8hmxAsb4ujIGVONn9vKGNQA2SgdpHNSyZUYiFMuEEA----"
+
+
+------MultipartBoundary--8hmxAsb4ujIGVONn9vKGNQA2SgdpHNSyZUYiFMuEEA----
+Content-Type: text/html
+Content-ID: <frame-7F5FC856C436F1FD76A1CF6F752820E4@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://docs.oracle.com/cd/E19455-01/806-5257/sync-12/index.html
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.=
+w3.org/TR/html4/loose.dtd"><html><head><meta http-equiv=3D"Content-Type" co=
+ntent=3D"text/html; charset=3DUTF-8"><link rel=3D"stylesheet" type=3D"text/=
+css" href=3D"cid:css-b156e0e9-24de-4910-aad1-52eed88ce887@mhtml.blink" /><l=
+ink rel=3D"stylesheet" type=3D"text/css" href=3D"cid:css-b199aca8-0219-427a=
+-85e0-9651da0c06e7@mhtml.blink" /><link rel=3D"stylesheet" type=3D"text/css=
+" href=3D"cid:css-559aa0a4-dcba-4fc0-ab21-333c03e03ddb@mhtml.blink" /><titl=
+e>Mutex Lock Code Examples (Multithreaded Programming Guide) </title><link =
+type=3D"text/css" rel=3D"stylesheet" href=3D"https://docs.oracle.com/docs/d=
+common/dsc/css/default.css"><link type=3D"text/css" rel=3D"stylesheet" href=
+=3D"https://docs.oracle.com/docs/dcommon/dsc/css/www.css"><link type=3D"tex=
+t/css" rel=3D"stylesheet" href=3D"https://docs.oracle.com/docs/dcommon/dsc/=
+css/dsc.css"></head><body><div id=3D"a0v0" class=3D"a0 a0v0"><div class=3D"=
+a2w0"><div id=3D"a2v7" class=3D"a2"><div class=3D"a2w1"><div class=3D"a2w2"=
+><div class=3D"a2w3"><div class=3D"a2w4"><div class=3D"a2topiclinks"><div c=
+lass=3D"a2x1"></div><a id=3D"sunlogo" title=3D"Oracle Home Page" href=3D"ht=
+tp://www.oracle.com/"><img width=3D"98" height=3D"58" border=3D"0" alt=3D"O=
+racle Homeage" src=3D"https://docs.oracle.com/docs/dcommon/dsc/im/a.gif"></=
+a><img width=3D"1" height=3D"33" border=3D"0" alt=3D"test" src=3D"https://d=
+ocs.oracle.com/docs/dcommon/dsc/im/a.gif" id=3D"venuespacer"></div></div></=
+div></div></div></div></div><div id=3D"breadcrumb"><a href=3D"http://www.or=
+acle.com/technetwork/indexes/documentation/index.html">Documentation Home</=
+a> &nbsp;&gt; <a href=3D"https://docs.oracle.com/cd/E19455-01/806-5257/inde=
+x.html">Multithreaded Programming Guide </a>  &nbsp;&gt; <a href=3D"https:/=
+/docs.oracle.com/cd/E19455-01/806-5257/6je9h032m/index.html">Chapter 4 Prog=
+ramming with Synchronization Objects </a>  &nbsp;&gt; <a href=3D"https://do=
+cs.oracle.com/cd/E19455-01/806-5257/6je9h032p/index.html">Using Mutual Excl=
+usion Locks </a>   &nbsp;&gt; Mutex Lock Code Examples</div><br><div class=
+=3D"pagetitle" id=3D"sharepage">Multithreaded Programming Guide</div><div c=
+lass=3D"d8 d8v1" style=3D"margin: 10px;"><div class=3D"d8w1"><div class=3D"=
+d8w2"><div class=3D"d8w3"><div class=3D"d8w4"><ul><li class=3D"d8left"><a h=
+ref=3D"https://docs.oracle.com/cd/E19455-01/806-5257/sync-79566/index.html"=
+><em>Previous</em>: Destroy a Mutex</a></li><li class=3D"d8right"><a href=
+=3D"https://docs.oracle.com/cd/E19455-01/806-5257/6je9h032q/index.html"><em=
+>Next</em>: Condition Variable Attributes</a></li></ul></div></div></div></=
+div></div><div class=3D"pc11 imgMax-590" style=3D"margin: 10px;"><a xmlns:s=
+tr=3D"http://xml.apache.org/xalan/java/java.lang.String" name=3D"sync-12"><=
+/a><h2 class=3D"sol">Mutex Lock Code Examples</h2>
+<p>
+<a href=3D"https://docs.oracle.com/cd/E19455-01/806-5257/6je9h032p/index.ht=
+ml#sync-83415">Example 4-1</a> shows some code fragments with mutex locking=
+.</p>
+<a name=3D"sync-83415"></a><hr><h5 class=3D"sol">Example 4-1  Mutex Lock Ex=
+ample</h5><br><a name=3D""></a><pre>#include &lt;pthread.h&gt;
+
+pthread_mutex_t count_mutex;
+long long count;
+
+void
+increment_count()
+{
+	    pthread_mutex_lock(&amp;count_mutex);
+    count =3D count + 1;
+	    pthread_mutex_unlock(&amp;count_mutex);
+}
+
+long long
+get_count()
+{
+    long long c;
+   =20
+    pthread_mutex_lock(&amp;count_mutex);
+	    c =3D count;
+    pthread_mutex_unlock(&amp;count_mutex);
+	    return (c);
+}<a name=3D"sync-ix313"></a><a name=3D"sync-ix314"></a>
+</pre>
+<hr>
+<p>The two functions in <a href=3D"https://docs.oracle.com/cd/E19455-01/806=
+-5257/6je9h032p/index.html#sync-83415">Example 4-1</a> use the mutex lock f=
+or different purposes. The <kbd><b>increment_count()</b></kbd> function use=
+s the mutex lock simply to ensure an atomic update of the shared variable. =
+The <kbd><b>get_count()</b></kbd> function uses the mutex lock to guarantee=
+ that the 64-bit quantity <var>count</var> is read atomically. On a 32-bit =
+architecture, a <code>long</code> <code>long</code> is really two 32-bit qu=
+antities.</p>
+<p>Reading an integer value is an atomic operation because integer is the c=
+ommon word size on most machines.</p>
+<a name=3D"sync-ex-3"></a><h3 class=3D"sol">Using Locking Hierarchies</h3>
+<p>You will occasionally want to access two resources at once. Perhaps you =
+are using one of the resources, and then discover that the other resource i=
+s needed as well. There could be a problem if two threads attempt to claim =
+both resources but lock the associated mutexes in different orders. For exa=
+mple, if the two threads lock mutexes 1 and 2 respectively, then a deadlock=
+<a name=3D"indexterm-81"></a> occurs when each attempts to lock the other m=
+utex. <a href=3D"https://docs.oracle.com/cd/E19455-01/806-5257/6je9h032p/in=
+dex.html#sync-ex-2">Example 4-2</a> shows possible deadlock scenarios.</p>
+<a name=3D"sync-ex-2"></a><hr><h5 class=3D"sol">Example 4-2  Deadlock</h5><=
+br><a name=3D""></a><a name=3D""></a><table width=3D"100%" cellpadding=3D"1=
+0" cellspacing=3D"0" border=3D"1">
+<thead>
+<tr>
+<th scope=3D"col" align=3D"left" valign=3D"bottom">
+<p> Thread 1&nbsp;</p>
+</th><th scope=3D"col" align=3D"left" valign=3D"bottom">
+<p> Thread 2&nbsp;</p>
+</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td align=3D"left" valign=3D"top">
+<p>
+<tt>pthread_mutex_lock(&amp;m1);</tt>
+</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p> &nbsp;</p>
+<p>/* use resource 1 */&nbsp;</p>
+<p>&nbsp;</p>
+<p>
+<tt>pthread_mutex_lock(&amp;m2);</tt>
+</p>
+<p> &nbsp;</p>
+<p>&nbsp;</p>
+<p>/* use resources1 and 2 */&nbsp;</p>
+<p>
+<tt>pthread_mutex_unlock(&amp;m2);</tt>
+</p>
+<p>
+<tt>pthread_mutex_unlock(&amp;m1);</tt>
+</p>
+</td><td align=3D"left" valign=3D"top">
+<p>
+<tt>pthread_mutex_lock(&amp;m2);</tt>
+</p>
+<p> &nbsp;</p>
+<p>&nbsp;</p>
+<p>/* use resource 2 */&nbsp;</p>
+<p>&nbsp;</p>
+<p>
+<tt>pthread_mutex_lock(&amp;m1);</tt>
+</p>
+<p> &nbsp;</p>
+<p>/* use resources 1 and 2 */&nbsp;</p>
+<p>
+<tt>pthread_mutex_unlock(&amp;m1);</tt>
+</p>
+<p>
+<tt>pthread_mutex_unlock(&amp;m2);</tt>
+</p>
+</td>
+</tr>
+
+</tbody>
+</table>
+<p>=20
+</p><p>=20
+</p><hr>
+<p>The best way to avoid this problem is to make sure that whenever threads=
+ lock multiple mutexes, they do so in the same order. When locks are always=
+ taken in a prescribed order, deadlock should not occur. This technique is =
+known as lock hierarchies: order the mutexes by logically assigning numbers=
+ to them. </p>
+<p>Also, honor the restriction that you cannot take a mutex that is assigne=
+d <b>n</b> when you are holding any mutex assigned a number greater than <b=
+>n</b>. </p>
+<p>However, this technique cannot always be used--sometimes you must take t=
+he mutexes in an order other than prescribed. To prevent deadlock in such a=
+ situation, use  <kbd><b>pthread_mutex_trylock()</b></kbd>. One thread must=
+ release its mutexes when it discovers that deadlock would otherwise be ine=
+vitable.</p>
+<a name=3D"sync-ex-13"></a><hr><h5 class=3D"sol">Example 4-3  Conditional L=
+ocking<a name=3D"sync-ix317"></a>
+</h5><br><a name=3D""></a><a name=3D""></a><table width=3D"100%" cellpaddin=
+g=3D"10" cellspacing=3D"0" border=3D"1">
+<thead>
+<tr>
+<th scope=3D"col" align=3D"left" valign=3D"bottom">
+<p> Thread 1&nbsp;</p>
+</th><th scope=3D"col" align=3D"left" valign=3D"bottom">
+<p> Thread 2&nbsp;</p>
+</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td align=3D"left" valign=3D"top">
+<p>
+<tt>pthread_mutex_lock(&amp;m1); pthread_mutex_lock(&amp;m2);</tt>
+</p>
+<p> &nbsp;</p>
+<p> &nbsp;</p>
+<p> &nbsp;</p>
+<p>&nbsp;</p>
+<p>/* no processing */&nbsp;</p>
+<p>&nbsp;</p>
+<p>
+<tt>pthread_mutex_unlock(&amp;m2);</tt>
+</p>
+<p>
+<tt>pthread_mutex_unlock(&amp;m1</tt>); </p>
+</td><td align=3D"left" valign=3D"top">
+<p>
+<tt>for (; ;)</tt>
+</p>
+<p>
+<tt>{          pthread_mutex_lock(&amp;m2);</tt>
+</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>
+<tt>if(pthread_mutex_trylock(&amp;m1)=3D=3D0)</tt>
+</p>
+<p>/* got it! */                                        &nbsp;</p>
+<p>
+<tt>break;</tt>
+</p>
+<p>/* didn't get it */&nbsp;</p>
+<p>
+<tt>pthread_mutex_unlock(&amp;m2);</tt>
+</p>
+<p>
+<tt> }</tt>
+</p>
+<p>/* get locks; no processing */&nbsp;</p>
+<p>
+<tt>pthread_mutex_unlock(&amp;m1);</tt>
+</p>
+<p>
+<tt>pthread_mutex_unlock(&amp;m2);</tt>
+</p>
+</td>
+</tr>
+
+</tbody>
+</table>
+<p>=20
+</p><p>=20
+</p><hr>
+<p>In <a href=3D"https://docs.oracle.com/cd/E19455-01/806-5257/6je9h032p/in=
+dex.html#sync-ex-13">Example 4-3</a>, thread 1 locks mutexes in the prescri=
+bed order, but thread 2 takes them out of order. To make certain that there=
+ is no deadlock, thread 2 has to take mutex 1 very carefully; if it were to=
+ block waiting for the mutex to be released, it is likely to have just ente=
+red into a deadlock with thread 1.</p>
+<p>To ensure this does not happen, thread 2 calls <kbd><b>pthread_mutex_try=
+lock()</b></kbd>, which takes the mutex if it is available. If it is not, t=
+hread 2 returns immediately, reporting failure. At this point, thread 2 mus=
+t release mutex 2, so that thread 1 can lock it, and then release both mute=
+x 1 and mutex 2. <a name=3D"sync-ix320"></a>
+</p>
+<a name=3D"sync-83550"></a><h3 class=3D"sol">Nested Locking With a Singly L=
+inked List</h3>
+<p>
+<a href=3D"https://docs.oracle.com/cd/E19455-01/806-5257/6je9h032p/index.ht=
+ml#sync-78558">Example 4-4</a> and <a href=3D"https://docs.oracle.com/cd/E1=
+9455-01/806-5257/6je9h032p/index.html#sync-94944">Example 4-5</a> show how =
+to take three locks at once, but prevent deadlock by taking the locks in a =
+prescribed order.</p>
+<a name=3D"sync-78558"></a><hr><h5 class=3D"sol">Example 4-4  Singly Linked=
+ List Structure</h5><br><a name=3D""></a><pre>typedef struct node1 {
+    int value;
+    struct node1 *link;
+    pthread_mutex_t lock;
+} node1_t;
+
+node1_t ListHead;</pre>
+<hr>
+<p>This example uses a singly linked list structure with each node containi=
+ng a mutex. To remove a node from the list, first search the list starting =
+at <var>ListHead</var> (which itself is never removed) until the desired no=
+de is found. </p>
+<p>To protect this search from the effects of concurrent deletions, lock ea=
+ch node before any of its contents are accessed. Because all searches start=
+ at <var>ListHead</var>, there is never a deadlock because the locks are al=
+ways taken in list order.</p>
+<p>When the desired node is found, lock both the node and its predecessor s=
+ince the change involves both nodes. Because the predecessor's lock is alwa=
+ys taken first, you are again protected from deadlock. <a href=3D"https://d=
+ocs.oracle.com/cd/E19455-01/806-5257/6je9h032p/index.html#sync-94944">Examp=
+le 4-5</a> shows the C code to remove an item from a singly linked list.</p=
+>
+<a name=3D"sync-94944"></a><hr><h5 class=3D"sol">Example 4-5  Singly Linked=
+ List With Nested Locking</h5><br><a name=3D""></a><pre>node1_t *delete(int=
+ value)
+{
+    node1_t *prev, *current;
+
+    prev =3D &amp;ListHead;
+    pthread_mutex_lock(&amp;prev-&gt;lock);<a name=3D"sync-ix321"></a>
+    while ((current =3D prev-&gt;link) !=3D NULL) {
+        pthread_mutex_lock(&amp;current-&gt;lock);
+        if (current-&gt;value =3D=3D value) {
+            prev-&gt;link =3D current-&gt;link;
+            pthread_mutex_unlock(&amp;current-&gt;lock);<a name=3D"sync-ix3=
+22"></a>
+            pthread_mutex_unlock(&amp;prev-&gt;lock);
+            current-&gt;link =3D NULL;
+            return(current);
+        }
+        pthread_mutex_unlock(&amp;prev-&gt;lock);
+        prev =3D current;
+    }
+    pthread_mutex_unlock(&amp;prev-&gt;lock);
+    return(NULL);
+}</pre>
+<hr>
+<a name=3D"sync-14"></a><h3 class=3D"sol">Nested Locking With a Circular Li=
+nked List</h3>
+<p>
+<a href=3D"https://docs.oracle.com/cd/E19455-01/806-5257/6je9h032p/index.ht=
+ml#sync-50939">Example 4-6</a> modifies the previous list structure by conv=
+erting it into a circular list. There is no longer a distinguished head nod=
+e; now a thread might be associated with a particular node and might perfor=
+m operations on that node and its neighbor. Note that lock hierarchies do n=
+ot work easily here because the obvious hierarchy (following the links) is =
+circular. </p>
+<a name=3D"sync-50939"></a><hr><h5 class=3D"sol">Example 4-6  Circular Link=
+ed List Structure</h5><br><a name=3D""></a><pre>typedef struct node2 {
+    int value;
+    struct node2 *link;
+    pthread_mutex_t lock;
+} node2_t;</pre>
+<hr>
+<p>Here is the C code that acquires the locks on two nodes and performs an =
+operation involving both of them.      <a name=3D"sync-ix323"></a> <a name=
+=3D"sync-ix324"></a> <a name=3D"sync-ix325"></a>
+</p>
+<a name=3D"sync-ex-15"></a><hr><h5 class=3D"sol">Example 4-7  Circular Link=
+ed List With Nested Locking</h5><br><a name=3D""></a><a name=3D""></a><tabl=
+e width=3D"100%" cellpadding=3D"10" cellspacing=3D"0" border=3D"1">
+<thead>
+<tr>
+<th scope=3D"col" align=3D"left" valign=3D"bottom"><a name=3D""></a>
+<pre>void Hit Neighbor(node2_t *me) {
+    while (1) {
+        pthread_mutex_lock(&amp;me-&gt;lock);
+        if (pthread_mutex_lock(&amp;me-&gt;link-&gt;lock)!=3D 0) {
+            /* failed to get lock */            =20
+            pthread_mutex_unlock(&amp;me-&gt;lock);  <a name=3D"sync-ix327"=
+></a>           =20
+            continue;        =20
+        }        =20
+        break;    =20
+    }    =20
+    me-&gt;link-&gt;value +=3D me-&gt;value;    =20
+    me-&gt;value /=3D2;    =20
+    pthread_mutex_unlock(&amp;me-&gt;link-&gt;lock);    =20
+    pthread_mutex_unlock(&amp;me-&gt;lock);
+}<a name=3D"sync-ix326"></a>
+</pre>
+
+</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td align=3D"left" valign=3D"top">&nbsp;</td>
+</tr>
+
+</tbody>
+</table>
+<p>=20
+</p><p>=20
+</p><hr>
+</div><div class=3D"d8 d8v1" style=3D"margin: 10px;"><div class=3D"d8w1"><d=
+iv class=3D"d8w2"><div class=3D"d8w3"><div class=3D"d8w4"><ul><li class=3D"=
+d8left"><a href=3D"https://docs.oracle.com/cd/E19455-01/806-5257/sync-79566=
+/index.html"><em>Previous</em>: Destroy a Mutex</a></li><li class=3D"d8righ=
+t"><a href=3D"https://docs.oracle.com/cd/E19455-01/806-5257/6je9h032q/index=
+.html"><em>Next</em>: Condition Variable Attributes</a></li></ul></div></di=
+v></div></div></div><div class=3D"a5 a5v0" id=3D"a5">
+<ul>
+    <li class=3D"copyright">=C2=A9 2010, Oracle Corporation and/or its affi=
+liates</li>
+</ul>
+</div>
+</div><div id=3D"footer-banner" style=3D"display: inline-block;"><ul><li><d=
+iv id=3D"teconsent" consent=3D"undefined" aria-label=3D"Open Cookie Prefere=
+nces Modal" class=3D"truste_caIcon_display" role=3D"complementary"><a role=
+=3D"link" id=3D"icon-id032897561375374873" tabindex=3D"0" lang=3D"zh" aria-=
+haspopup=3D"dialog" aria-label=3D"Cookie Preferences, opens a dedicated pop=
+up modal window" class=3D"truste_cursor_pointer">Cookie =E5=96=9C=E5=A5=BD=
+=E8=AE=BE=E7=BD=AE</a></div></li><li><a id=3D"adchoices" class=3D"new-windo=
+w" target=3D"_blank" href=3D"https://www.oracle.com/legal/privacy/marketing=
+-cloud-data-cloud-privacy-policy.html#12">Ad Choices</a></li></ul></div><if=
+rame name=3D"trustarc_notice" id=3D"trustarcNoticeFrame" title=3D"Trustarc =
+Cross-Domain Consent Frame" src=3D"cid:frame-1BA9C8A8B4D0A288917774C8406089=
+B9@mhtml.blink" style=3D"display: none;"></iframe></body></html>
+------MultipartBoundary--8hmxAsb4ujIGVONn9vKGNQA2SgdpHNSyZUYiFMuEEA----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-b156e0e9-24de-4910-aad1-52eed88ce887@mhtml.blink
+
+@charset "utf-8";
+
+.truste_caIcon_display { display: inline-block !important; }
+------MultipartBoundary--8hmxAsb4ujIGVONn9vKGNQA2SgdpHNSyZUYiFMuEEA----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-b199aca8-0219-427a-85e0-9651da0c06e7@mhtml.blink
+
+@charset "utf-8";
+
+.truste_cursor_pointer { cursor: pointer; }
+
+.truste_border_none { border: none; }
+------MultipartBoundary--8hmxAsb4ujIGVONn9vKGNQA2SgdpHNSyZUYiFMuEEA----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-559aa0a4-dcba-4fc0-ab21-333c03e03ddb@mhtml.blink
+
+@charset "utf-8";
+
+#footer-banner ul li:nth-child(2) { margin-left: 0px; }
+
+#footer-banner { z-index: 9999; position: fixed; margin: 0px auto; bottom: =
+0px; left: 0px; right: 0px; border-top: 1px solid rgb(172, 183, 191); color=
+: rgb(25, 88, 170); padding: 0em 1em; text-align: center; line-height: 15px=
+; font-weight: normal; font-family: Arial; clear: both; background-color: r=
+gb(235, 235, 235) !important; font-size: 12px !important; }
+
+#teconsent { display: inline-block; }
+
+#footer-banner ul { list-style: none; padding: 0px; margin: 0px 20px 0px 0p=
+x; font-size: 12px !important; }
+
+#footer-banner li { display: inline-block; }
+
+#footer-banner li + li::before { content: "|"; margin-right: 4px; margin-le=
+ft: 4px; color: rgb(170, 170, 170); }
+
+#footer-banner a { color: rgb(25, 88, 170); text-decoration: none; font-siz=
+e: 12px !important; }
+
+#footer-banner a:focus, #footer-banner a:hover { color: rgb(25, 88, 170); t=
+ext-decoration: underline; }
+------MultipartBoundary--8hmxAsb4ujIGVONn9vKGNQA2SgdpHNSyZUYiFMuEEA----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://docs.oracle.com/docs/dcommon/dsc/css/default.css
+
+@charset "utf-8";
+=0A
+------MultipartBoundary--8hmxAsb4ujIGVONn9vKGNQA2SgdpHNSyZUYiFMuEEA----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://docs.oracle.com/docs/dcommon/dsc/css/www.css
+
+@charset "utf-8";
+=0A
+------MultipartBoundary--8hmxAsb4ujIGVONn9vKGNQA2SgdpHNSyZUYiFMuEEA----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://docs.oracle.com/docs/dcommon/dsc/css/dsc.css
+
+@charset "utf-8";
+=0A
+------MultipartBoundary--8hmxAsb4ujIGVONn9vKGNQA2SgdpHNSyZUYiFMuEEA----
+Content-Type: text/html
+Content-ID: <frame-1BA9C8A8B4D0A288917774C8406089B9@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://consent.trustarc.com/get?name=crossdomain.html&domain=oracle.com
+
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; charset=
+=3Dwindows-1252"></head><body></body></html>
+------MultipartBoundary--8hmxAsb4ujIGVONn9vKGNQA2SgdpHNSyZUYiFMuEEA------

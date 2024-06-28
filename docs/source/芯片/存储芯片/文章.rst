@@ -1,0 +1,56 @@
+单片机常有Flash，而不常有EEPROM原因
+https://www.eet-china.com/mp/a182885.html
+
+RK3568如何挂载SPI FRAM铁电存储芯片
+https://blog.csdn.net/weixin_59676688/article/details/133919195
+
+My first attempts to take die shots
+https://www.cpu-world.com/forum/viewtopic.php?t=21226
+
+浅谈 SSD，eMMC，UFS
+https://www.wpgdadatong.com.cn/blog/detail/43111
+
+半导体的发展历史：从电子管-晶体管-集成电路
+https://www.sumzi.com/englishnew/news_info.aspx?id=9428
+
+简单认识芯片里的电阻电容
+http://www.jiuhaomicro.com/news/shownews.php?id=163#:~:text=%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%E7%9A%84%E7%94%B5%E9%98%BB%E4%B8%80%E8%88%AC,%E4%B8%BAR%3D%CF%81L%2FWd.
+
+2 種 M.2 SSD 固態硬碟的類型：SATA 和 NVMe
+https://www.kingston.com/tw/blog/pc-performance/two-types-m2-vs-ssd
+
+芯科普 | 一文了解Flash 和 eMMC、UFS的区别
+https://www.elexcon.com/news-detail/i-861.html
+
+嵌入式多媒体卡 (eMMC) 与安全数字 (SD) 卡
+https://smartsemi.com/embedded-multimediacards-emmcs-vs-secure-digital-sd-cards/
+
+
+emmc固化在PCB上，8位宽总线，并行，目前最高达512GB。
+sd可拆卸，microSD,4位宽数据总线，混合接口，host可以SD（并行）或使用串行外设接口（SPI）操作，目前最高达2TB。
+
+
+可靠的NAND快閃記憶體控制器用於eMMC、SD和microSD存儲解決方案
+https://www.hyperstone.com/zt/eMMC--SD--NAND-3599.html
+
+為什麼要用SPI NAND 取代嵌入式 NOR flash？
+https://www.wpgdadatong.com/blog/detail/72784
+
+SPI NAND概念 什么是SPI NAND？
+http://www.longsto.com/news/19.html
+
+主控（MCU）中可不需带有传统NAND的控制器（eMMC...）,只需SPI接口即可。
+
+SPI NAMD Flash=Nand Flash + SPI Controller。
+
+NAND Flash的规格，SLC(单层/平面/1bit)，MLC(双层，2bit)，TLC（三层，3bit），FLC（4层，4bit），SLC质量最稳。
+
+SPI NAND常用在IoT、低成本Embedded、传感器等。
+
+eMMC常用在手机、电脑、汽车电子、高性能Embedded。
+
+路由器中的存储
+
+1. NVRAM(EEPROM)非易失性RAM（可读可写）————存储如 U-Boot SPL(Secondary Program Loader)
+2. RAM(DDR3 SDRAM)————运行从Flash复制过来的U-Boot/Kernel...
+3. Flash(SPI NAND/EMMC) ———— 包含ROM内容(uboot,kernel,dtb,rootfs等只读)和UserData(可读写)内容

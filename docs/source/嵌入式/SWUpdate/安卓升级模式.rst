@@ -1,0 +1,12 @@
+安卓升级模式
+================
+
+Recovery时代
+
+1. 下载升级包
+2. 检查包的完整性和签名
+3. 重启进入Recovery Console(RC)
+4. 再次验证签名
+5. 进行更新
+6. 重启进入Android
+7. 运行post update script(可选)

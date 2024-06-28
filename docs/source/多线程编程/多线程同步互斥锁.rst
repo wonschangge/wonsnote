@@ -1,0 +1,169 @@
+多线程同步互斥锁
+=========================
+
+`例程来源 <https://docs.oracle.com/cd/E19455-01/806-5257/sync-12/index.html>`_
+
+
+基础示例：
+---------------------------
+
+::
+
+    #include <pthread.h>
+
+    pthread_mutex_t count_mutex;
+    long long count;
+
+    void
+    increment_count()
+    {
+        pthread_mutex_lock(&count_mutex);
+            count = count + 1; // ensure an atomic update of the shared variable
+        pthread_mutex_unlock(&count_mutex);
+    }
+
+    long long
+    get_count()
+    {
+        long long c;
+        
+        pthread_mutex_lock(&count_mutex);
+            c = count; // guarantee that the 64-bit quantity count is read atomically
+        pthread_mutex_unlock(&count_mutex);
+        
+        return (c);
+    }
+
+死锁示例：
+---------------------------
+
+当且仅当：
+
+1. 线程1锁了m1，线程2锁了m2
+2. 线程1等待锁m2
+3. 线程2等待锁m1
+
+发生死锁
+
+线程1：
+
+::
+
+    pthread_mutex_lock(&m1);
+        /* use resource 1 */ 
+
+        pthread_mutex_lock(&m2);
+            /* use resources 1 and 2 */ 
+        pthread_mutex_unlock(&m2);
+    
+    pthread_mutex_unlock(&m1);
+
+线程2：
+
+::
+
+    pthread_mutex_lock(&m2);
+        /* use resource 2 */ 
+
+        pthread_mutex_lock(&m1);
+            /* use resources 1 and 2 */ 
+        pthread_mutex_unlock(&m1);
+
+    pthread_mutex_unlock(&m2);
+
+条件锁：
+---------------------------
+
+利用 pthread_mutex_trylock 来解决可能存在的死锁
+
+线程1：
+
+::
+
+    pthread_mutex_lock(&m1);
+        pthread_mutex_lock(&m2);
+        /* no processing */ 
+        pthread_mutex_unlock(&m2);
+    pthread_mutex_unlock(&m1);
+
+线程2：
+
+::
+
+    for (; ;)
+    {
+        pthread_mutex_lock(&m2);
+        
+        if(pthread_mutex_trylock(&m1)==0)
+            /* got it! */  
+            break;
+        /* didn't get it */ 
+        pthread_mutex_unlock(&m2);
+    }
+    /* get locks; no processing */ 
+    pthread_mutex_unlock(&m1);
+    pthread_mutex_unlock(&m2);
+
+有锁单链表：
+---------------------------
+
+::
+
+    typedef struct node1 {
+        int value;
+        struct node1 *link;
+        pthread_mutex_t lock;
+    } node1_t;
+
+    node1_t ListHead;
+
+    node1_t *delete(int value)
+    {
+        node1_t *prev, *current;
+
+        prev = &ListHead;
+        pthread_mutex_lock(&prev->lock);
+        while ((current = prev->link) != NULL) {
+            pthread_mutex_lock(&current->lock);
+            if (current->value == value) {
+                prev->link = current->link;
+                pthread_mutex_unlock(&current->lock);
+                pthread_mutex_unlock(&prev->lock);
+                current->link = NULL;
+                return(current);
+            }
+            pthread_mutex_unlock(&prev->lock);
+            prev = current;
+        }
+        pthread_mutex_unlock(&prev->lock);
+        return(NULL);
+    }
+
+
+有锁环形链表：
+----------------------------------
+
+::
+
+    typedef struct node2 {
+        int value;
+        struct node2 *link;
+        pthread_mutex_t lock;
+    } node2_t;
+
+
+    void Hit Neighbor(node2_t *me) {
+        while (1) {
+            pthread_mutex_lock(&me->lock);
+            if (pthread_mutex_lock(&me->link->lock)!= 0) {
+                /* failed to get lock */             
+                pthread_mutex_unlock(&me->lock);              
+                continue;         
+            }         
+            break;     
+        }     
+        me->link->value += me->value;     
+        me->value /=2;     
+        pthread_mutex_unlock(&me->link->lock);     
+        pthread_mutex_unlock(&me->lock);
+    }

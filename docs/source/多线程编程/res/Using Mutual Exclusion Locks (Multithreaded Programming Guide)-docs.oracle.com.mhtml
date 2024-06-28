@@ -1,0 +1,1056 @@
+From: <Saved by Blink>
+Snapshot-Content-Location: https://docs.oracle.com/cd/E19455-01/806-5257/6je9h032p/index.html#sync-83415
+Subject: Using Mutual Exclusion Locks (Multithreaded Programming Guide)
+Date: Tue, 25 Jun 2024 14:47:39 +0800
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----MultipartBoundary--3UIDItEK3ZCgUrKcSUlTpXKHaaYYJOJzcbbL45Xb4T----"
+
+
+------MultipartBoundary--3UIDItEK3ZCgUrKcSUlTpXKHaaYYJOJzcbbL45Xb4T----
+Content-Type: text/html
+Content-ID: <frame-7F5FC856C436F1FD76A1CF6F752820E4@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://docs.oracle.com/cd/E19455-01/806-5257/6je9h032p/index.html#sync-83415
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.=
+w3.org/TR/html4/loose.dtd"><html><head><meta http-equiv=3D"Content-Type" co=
+ntent=3D"text/html; charset=3DUTF-8"><link rel=3D"stylesheet" type=3D"text/=
+css" href=3D"cid:css-69fb18b1-9cba-4d78-b8dc-cf28f2273a89@mhtml.blink" /><l=
+ink rel=3D"stylesheet" type=3D"text/css" href=3D"cid:css-7ea730d6-42b1-4124=
+-867b-68d4b4aff3b1@mhtml.blink" /><link rel=3D"stylesheet" type=3D"text/css=
+" href=3D"cid:css-80fb7080-9ad7-4a8c-adfd-0935d9572d8e@mhtml.blink" /><titl=
+e>Using Mutual Exclusion Locks (Multithreaded Programming Guide) </title><l=
+ink type=3D"text/css" rel=3D"stylesheet" href=3D"https://docs.oracle.com/do=
+cs/dcommon/dsc/css/default.css"><link type=3D"text/css" rel=3D"stylesheet" =
+href=3D"https://docs.oracle.com/docs/dcommon/dsc/css/www.css"><link type=3D=
+"text/css" rel=3D"stylesheet" href=3D"https://docs.oracle.com/docs/dcommon/=
+dsc/css/dsc.css"></head><body><div id=3D"a0v0" class=3D"a0 a0v0"><div class=
+=3D"a2w0"><div id=3D"a2v7" class=3D"a2"><div class=3D"a2w1"><div class=3D"a=
+2w2"><div class=3D"a2w3"><div class=3D"a2w4"><div class=3D"a2topiclinks"><d=
+iv class=3D"a2x1"></div><a id=3D"sunlogo" title=3D"Oracle Home Page" href=
+=3D"http://www.oracle.com/"><img width=3D"98" height=3D"58" border=3D"0" al=
+t=3D"Oracle Homeage" src=3D"https://docs.oracle.com/docs/dcommon/dsc/im/a.g=
+if"></a><img width=3D"1" height=3D"33" border=3D"0" alt=3D"test" src=3D"htt=
+ps://docs.oracle.com/docs/dcommon/dsc/im/a.gif" id=3D"venuespacer"></div></=
+div></div></div></div></div></div><div id=3D"breadcrumb"><a href=3D"http://=
+www.oracle.com/technetwork/indexes/documentation/index.html">Documentation =
+Home</a> &nbsp;&gt; <a href=3D"https://docs.oracle.com/cd/E19455-01/806-525=
+7/index.html">Multithreaded Programming Guide </a>  &nbsp;&gt; <a href=3D"h=
+ttps://docs.oracle.com/cd/E19455-01/806-5257/6je9h032m/index.html">Chapter =
+4 Programming with Synchronization Objects </a>   &nbsp;&gt; Using Mutual E=
+xclusion Locks</div><br><div class=3D"pagetitle" id=3D"sharepage">Multithre=
+aded Programming Guide</div><div class=3D"d8 d8v1" style=3D"margin: 10px;">=
+<div class=3D"d8w1"><div class=3D"d8w2"><div class=3D"d8w3"><div class=3D"d=
+8w4"><ul><li class=3D"d8left"><a href=3D"https://docs.oracle.com/cd/E19455-=
+01/806-5257/6je9h032o/index.html"><em>Previous</em>: Mutual Exclusion Lock =
+Attributes</a></li><li class=3D"d8right"><a href=3D"https://docs.oracle.com=
+/cd/E19455-01/806-5257/6je9h032q/index.html"><em>Next</em>: Condition Varia=
+ble Attributes</a></li></ul></div></div></div></div></div><div class=3D"pc1=
+1 imgMax-590" style=3D"margin: 10px;"><a xmlns:str=3D"http://xml.apache.org=
+/xalan/java/java.lang.String" name=3D"6je9h032p"></a><h1 class=3D"sol">Usin=
+g Mutual Exclusion Locks</h1>
+<p>
+<a href=3D"https://docs.oracle.com/cd/E19455-01/806-5257/6je9h032p/index.ht=
+ml#sync-tbl-12">Table 4-3</a> lists the functions discussed in this chapter=
+ that manipulate mutex locks.</p>
+<a name=3D"sync-tbl-12"></a>Table 4-3  Routines for Mutual Exclusion Locks<=
+table width=3D"100%" cellpadding=3D"10" cellspacing=3D"0" border=3D"2">
+<caption>
+<b></b>
+</caption>
+<thead>
+<tr>
+<th scope=3D"col" align=3D"left" valign=3D"top">
+<p>Operation&nbsp;</p>
+</th><th scope=3D"col" align=3D"left" valign=3D"top">
+<p>Destination Discussion&nbsp;</p>
+</th><th scope=3D"col" align=3D"left" valign=3D"top">&nbsp;</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td align=3D"left" valign=3D"top">
+<p>Initialize a mutex&nbsp;</p>
+</td><td align=3D"left" valign=3D"top">
+<p>
+<a href=3D"https://docs.oracle.com/cd/E19455-01/806-5257/6je9h032p/index.ht=
+ml#sync-113">"pthread_mutex_init(3THR)"</a>
+</p>
+</td>
+</tr>
+
+<tr>
+<td align=3D"left" valign=3D"top">
+<p>Make mutex consistent&nbsp;</p>
+</td><td align=3D"left" valign=3D"top">
+<p>
+<a href=3D"https://docs.oracle.com/cd/E19455-01/806-5257/6je9h032p/index.ht=
+ml#sync-116">"pthread_mutex_consistent_np(3T)"</a>
+</p>
+</td>
+</tr>
+
+<tr>
+<td align=3D"left" valign=3D"top">
+<p>Lock a mutex&nbsp;</p>
+</td><td align=3D"left" valign=3D"top">
+<p>
+<a href=3D"https://docs.oracle.com/cd/E19455-01/806-5257/6je9h032p/index.ht=
+ml#sync-117">"pthread_mutex_lock(3THR)"</a>
+</p>
+</td>
+</tr>
+
+<tr>
+<td align=3D"left" valign=3D"top">
+<p>Unlock a mutex&nbsp;</p>
+</td><td align=3D"left" valign=3D"top">
+<p>
+<a href=3D"https://docs.oracle.com/cd/E19455-01/806-5257/6je9h032p/index.ht=
+ml#sync-61163">"pthread_mutex_unlock(3THR)"</a>
+</p>
+</td>
+</tr>
+
+<tr>
+<td align=3D"left" valign=3D"top">
+<p>Lock with a nonblocking mutex&nbsp;</p>
+</td><td align=3D"left" valign=3D"top">
+<p>
+<a href=3D"https://docs.oracle.com/cd/E19455-01/806-5257/6je9h032p/index.ht=
+ml#sync-24727">"pthread_mutex_trylock(3THR)"</a>
+</p>
+</td>
+</tr>
+
+<tr>
+<td align=3D"left" valign=3D"top">
+<p>Destroy a mutex&nbsp;</p>
+</td><td align=3D"left" valign=3D"top">
+<p>
+<a href=3D"https://docs.oracle.com/cd/E19455-01/806-5257/6je9h032p/index.ht=
+ml#sync-20140">"pthread_mutex_destroy(3THR)"</a>
+</p>
+</td>
+</tr>
+
+</tbody>
+</table>
+<p>=20
+</p><p>The default scheduling policy, <tt>SCHED_OTHER</tt>, does not specif=
+y the order in which threads can acquire a lock. When multiple threads are =
+waiting for a mutex, the order of acquisition is undefined. When there is c=
+ontention, the default behavior is to unblock threads in priority order.</p=
+>
+<a name=3D"sync-112"></a><h2 class=3D"sol">Initialize a Mutex</h2>
+<a name=3D"sync-113"></a><h3 class=3D"sol">pthread_mutex_init(3THR)</h3>
+<a name=3D"indexterm-62"></a><p>Use <a href=3D"https://docs.oracle.com/docs=
+/cd/E19455-01/806-0630/6j9vkb8gp/index.html">pthread_mutex_init(3THR)</a> t=
+o initialize the mutex pointed at by <var>mp</var> to its default value (<v=
+ar>mattr</var> is <tt>NULL</tt>), or to specify mutex attributes that have =
+already been set with <kbd><b>pthread_mutexattr_init()</b></kbd>. (For Sola=
+ris threads, see <a href=3D"https://docs.oracle.com/cd/E19455-01/806-5257/6=
+je9h033t/index.html#sthreads-51902">"mutex_init(3THR)"</a>.)</p>
+<a name=3D""></a><pre>Prototype:
+int	pthread_mutex_init(pthread_mutex_t *<var>mp</var>,
+    const pthread_mutexattr_t *<var>mattr</var>);</pre>
+<a name=3D""></a><pre>#include &lt;pthread.h&gt;
+
+pthread_mutex_t <var>mp</var> =3D PTHREAD_MUTEX_INITIALIZER;
+pthread_mutexattr_t <var>mattr</var>;
+int <var>ret</var>;
+
+/* initialize a mutex to its default value */
+<var>ret</var> =3D pthread_mutex_init(&amp;<var>mp</var>, NULL);
+
+/* initialize a mutex */
+<var>ret</var> =3D pthread_mutex_init(&amp;<var>mp</var>, &amp;<var>mattr</=
+var>); </pre>
+<p>When the mutex is initialized, it is in an unlocked state. The mutex can=
+ be in memory shared between processes or in memory private to a process.</=
+p>
+<hr><b>Note - </b><p>The mutex memory must be cleared to zero before initia=
+lization.</p>
+<hr>
+<p>The effect of <var>mattr</var> being <tt>NULL</tt> is the same as passin=
+g the address of a default mutex attribute object, but without the memory o=
+verhead.</p>
+<p>Statically defined mutexes can be initialized directly to have default a=
+ttributes with the macro <tt>PTHREAD_MUTEX_INITIALIZER</tt>.</p>
+<p>A mutex lock must not be reinitialized or destroyed while other threads =
+might be using it. Program failure will result if either action is not done=
+ correctly. If a mutex is reinitialized or destroyed, the application must =
+be sure the mutex is not currently in use.</p>
+<a name=3D"sync-114"></a><h4 class=3D"sol">Return Values</h4><p>
+<kbd><b>pthread_mutex_init()</b></kbd> returns zero after completing succes=
+sfully. Any other returned value indicates that an error occurred. When any=
+ of the following conditions occurs, the function fails and returns the cor=
+responding value.</p>
+<dl>
+<dt>
+<br>
+<p>
+<tt><samp>EBUSY</samp> <a name=3D"indexterm-63"></a></tt>
+</p>
+
+</dt>
+<dd>
+<p>The implementation has detected an attempt to reinitialize the object re=
+ferenced by <b>mp</b> (a previously initialized, but not yet destroyed mute=
+x).</p>
+
+</dd>
+</dl><dl>
+<dt>
+<br>
+<p>
+<tt><samp>EINVAL</samp> <a name=3D"indexterm-64"></a></tt>
+</p>
+
+</dt>
+<dd>
+<p>The <b>mattr</b> attribute value is invalid. The mutex has not been modi=
+fied.</p>
+
+</dd>
+</dl><dl>
+<dt>
+<br>
+<p>
+<tt><samp>EFAULT</samp> <a name=3D"indexterm-65"></a></tt>
+</p>
+
+</dt>
+<dd>
+<p>The address for the mutex pointed at by <var>mp </var>is invalid.</p>
+
+</dd>
+</dl>
+<a name=3D"sync-115"></a><h2 class=3D"sol">Make Mutex Consistent</h2>
+<a name=3D"sync-116"></a><h3 class=3D"sol">pthread_mutex_consistent_np(3T)<=
+/h3>
+<a name=3D"indexterm-66"></a><a name=3D""></a><pre>#include &lt;pthread.h&g=
+t;
+int	pthread_mutex_consistent_np(pthread_mutex_t *<var>mutex</var>); </pre>
+<hr><b>Note - </b><p>
+<kbd><b>pthread_mutex_consistent_np()</b></kbd> applies only if the symbol =
+<tt>_POSIX_THREAD_PRIO_INHERIT</tt> is defined and for mutexes that are ini=
+tialized with the protocol attribute value <tt>PTHREAD_PRIO_INHERIT</tt>.</=
+p>
+<hr>
+<p>If the owner of a mutex dies, the mutex can become inconsistent.</p>
+<p>
+<cite>pthread_mutex_consistent_np</cite> makes the mutex object, <var>mutex=
+</var>, consistent after the death of its owner. </p>
+<p>Call <kbd><b>pthread_mutex_lock()</b></kbd> to acquire the inconstent mu=
+tex. The <tt>EOWNWERDEAD</tt> return value indicates an inconsistent mutex.=
+</p>
+<p>Call <kbd><b>pthread_mutex_consistent_np()</b></kbd> while holding the m=
+utex acquired by a previuos call to <kbd><b>pthread_mutex_lock()</b></kbd>.=
+ </p>
+<p>Because the critical section protected by the mutex might have been left=
+ in an inconsistent state by the dead owner, make the mutex consistent only=
+ if you are able to make the critical section protected by the mutex consis=
+tent.</p>
+<p>Calls to <kbd><b>pthread_mutex_lock()</b></kbd>, <kbd><b>pthread_mutex_u=
+nlock()</b></kbd>, and <kbd><b>pthread_mutex_trylock()</b></kbd> for a cons=
+istent mutex behave in the normal manner.</p>
+<p>The behavior of <kbd><b>pthread_mutex_consistent_np()</b></kbd> for a mu=
+tex that is <b>not</b> inconsistent, or that is not held, is undefined.</p>
+<a name=3D"sync-108"></a><h4 class=3D"sol">Return Values</h4><p>
+<kbd><b>pthread_mutex_consistent_np()</b></kbd> returns zero after completi=
+ng successfully. Any other returned value indicates that an error occurred.=
+ When any of the following conditions occurs, the function fails and return=
+s the corresponding value.</p>
+<p>
+<kbd><b>pthread_mutex_consistent_np()</b></kbd> fails if:</p>
+<dl>
+<dt>
+<br>
+<p>
+<tt><samp>ENOSYS</samp> <a name=3D"indexterm-67"></a></tt>
+</p>
+
+</dt>
+<dd>
+<p>The option _POSIX_THREAD_PRIO_INHERIT is not defined or the implementati=
+on does not support <kbd><b>pthread_mutex_consistent_np()</b></kbd>.</p>
+
+</dd>
+</dl><p>
+<kbd><b>pthread_mutex_consistent_np()</b></kbd> might fail if:</p>
+<dl>
+<dt>
+<br>
+<p>
+<tt><samp>EINVAL</samp> <a name=3D"indexterm-68"></a></tt>
+</p>
+
+</dt>
+<dd>
+<p>The value specified by <var>mutex</var> is invalid.</p>
+
+</dd>
+</dl>
+<a name=3D"sync-45513"></a><h2 class=3D"sol">Lock a Mutex</h2>
+<a name=3D"sync-117"></a><h3 class=3D"sol">pthread_mutex_lock(3THR)</h3>
+<a name=3D"indexterm-69"></a><a name=3D""></a><pre>Prototype:
+int	pthread_mutex_lock(pthread_mutex_t *<var>mutex</var>); </pre>
+<a name=3D""></a><pre>#include &lt;pthread.h&gt;
+
+pthread_mutex_t <var>mutex</var>;
+int <var>ret</var>;
+
+<var>ret</var> =3D pthread_ mutex_lock(&amp;<var>mp</var>); /* acquire the =
+mutex */</pre>
+<p>Use <a href=3D"https://docs.oracle.com/docs/cd/E19455-01/806-0630/6j9vkb=
+8gq/index.html">pthread_mutex_lock(3THR)</a> to lock the mutex pointed to b=
+y <var>mutex</var>. When <kbd><b>pthread_mutex_lock()</b></kbd> returns, th=
+e mutex is locked and the calling thread is the owner. If the mutex is alre=
+ady locked and owned by another thread, the calling thread blocks until the=
+ mutex becomes available.  (For Solaris threads, see <a href=3D"https://doc=
+s.oracle.com/cd/E19455-01/806-5257/6je9h033t/index.html#sthreads-25301">"mu=
+tex_lock(3THR)"</a>.)</p>
+<p>If the mutex type is <a name=3D"indexterm-70"></a><tt>PTHREAD_MUTEX_NORM=
+AL</tt>, deadlock detection is not provided. Attempting to  relock the mute=
+x causes deadlock. If a thread attempts to unlock a mutex that it has not l=
+ocked or a mutex that is unlocked, undefined behaviour results.</p>
+<p>If the mutex type is <a name=3D"indexterm-71"></a><tt>PTHREAD_MUTEX_ERRO=
+RCHECK</tt>, then error checking 	is provided. If a thread attempts to relo=
+ck a mutex that it has already locked, an error will be returned. If a thre=
+ad attempts to unlock a mutex that it has not locked or a mutex that is unl=
+ocked, 	an error will be returned.</p>
+<p>If the mutex type is <a name=3D"indexterm-72"></a><tt>PTHREAD_MUTEX_RECU=
+RSIVE</tt>, then the mutex maintains the concept of a lock count. When a th=
+read successfully acquires a mutex for the first time, the lock count is se=
+t to one. Every time a thread relocks this mutex,  the lock count is increm=
+ented by one. Each time the thread unlocks the mutex, the lock count is dec=
+remented by one.  When the lock count reaches zero, the mutex becomes avail=
+able for other threads to acquire. If a thread attempts to unlock a mutex t=
+hat it has not locked or a mutex 	which  is unlocked, an error will be retu=
+rned. </p>
+<p>If the mutex type is <tt>PTHREAD_MUTEX_DEFAULT</tt>, attempting to recur=
+sively lock the mutex results in undefined behavior. Attempting to unlock t=
+he mutex if it was not locked by the calling thread results in undefined be=
+havior. Attempting to unlock the mutex if it is not locked 	results in unde=
+fined behavior. </p>
+<a name=3D"sync-118"></a><h4 class=3D"sol">Return Values</h4><p>
+<kbd><b>pthread_mutex_lock()</b></kbd> returns zero after completing succes=
+sfully. Any other returned value indicates that an error occurred. When any=
+ of the following conditions occurs, the function fails and returns the cor=
+responding value.</p>
+<dl>
+<dt>
+<br>
+<p>
+<tt><samp>EAGAIN</samp> <a name=3D"indexterm-73"></a></tt>
+</p>
+
+</dt>
+<dd>
+<p>The mutex could not be acquired because the maximum number of recursive =
+locks for mutex has been exceeded.</p>
+
+</dd>
+</dl><dl>
+<dt>
+<br>
+<p>
+<tt><samp>EDEADLK</samp> <a name=3D"indexterm-74"></a></tt>
+</p>
+
+</dt>
+<dd>
+<p>The current thread already owns the mutex.</p>
+
+</dd>
+</dl><p>If the symbol <tt>_POSIX_THREAD_PRIO_INHERIT</tt> is defined, the m=
+utex is initialized with the protocol attribute value <tt>PTHREAD_PRIO_INHE=
+RIT</tt>, and the <var>robustness</var> argument of <kbd><b>pthread_mutexat=
+tr_setrobust_np()</b></kbd> is <tt>PTHREAD_MUTEX_ROBUST_NP</tt> the functio=
+n fails and returns:</p>
+<dl>
+<dt>
+<br>
+<p>
+<tt><samp>EOWNERDEAD</samp><a name=3D"indexterm-75"></a></tt>
+</p>
+
+</dt>
+<dd>
+<p>The last owner of this mutex died while holding the mutex. This mutex is=
+ now owned by the caller. The caller must attempt to make the state protect=
+ed by the mutex consistent. </p>
+
+<p>If the caller is able to make the state consistent, call <kbd><b>pthread=
+_mutex_consistent_np()</b></kbd> for the mutex and unlock the mutex. Subseq=
+uent calls to <kbd><b>pthread_mutex_lock()</b></kbd> will behave normally.<=
+/p>
+
+<p>If the caller is unable to make the state consistent, do not call <kbd><=
+b>pthread_mutex_init()</b></kbd> for the mutex, but unlock the mutex. Subse=
+quent calls to <kbd><b>pthread_mutex_lock()</b></kbd> fail to acquire the m=
+utex and return an <samp>ENOTRECOVERABLE</samp> error code.</p>
+
+<p>If the owner that acquired the lock with <samp>EOWNERDEAD</samp> dies, t=
+he next owner acquires the lock with <samp>EOWNERDEAD</samp>.</p>
+
+</dd>
+</dl><dl>
+<dt>
+<br>
+<p>
+<tt><samp>ENOTRECOVERABLE</samp><a name=3D"indexterm-76"></a></tt>
+</p>
+
+</dt>
+<dd>
+<p>The mutex you are trying to acquire is protecting state left irrecoverab=
+le by the mutex's previous owner that died while holding the lock. The mute=
+x has not been acquired. This condition can occur when the lock was previou=
+sly acquired with <samp>EOWNERDEAD</samp> and the owner was unable to clean=
+up the state and had unlocked the mutex without making the mutex state cons=
+istent.</p>
+
+</dd>
+<dt>
+<br>
+<p>
+<tt><samp>ENOMEM</samp><a name=3D"indexterm-77"></a></tt>
+</p>
+
+</dt>
+<dd>
+<p>The limit on the number of simultaneously held mutexes has been exceeded=
+.</p>
+
+</dd>
+</dl>
+<a name=3D"sync-20353"></a><h2 class=3D"sol">Unlock a Mutex</h2>
+<a name=3D"sync-61163"></a><h3 class=3D"sol">pthread_mutex_unlock(3THR)</h3=
+>
+<a name=3D"sync-ix305"></a><p>Use<a href=3D"https://docs.oracle.com/docs/cd=
+/E19455-01/806-0630/6j9vkb8gt/index.html">pthread_mutex_unlock(3THR)</a> to=
+ unlock the mutex pointed to by <var>mutex</var>.  (For Solaris threads, se=
+e <a href=3D"https://docs.oracle.com/cd/E19455-01/806-5257/6je9h033t/index.=
+html#sthreads-79899">"mutex_unlock(3THR)"</a>.)</p>
+<a name=3D""></a><pre>Prototype:
+int	pthread_mutex_unlock(pthread_mutex_t *<var>mutex</var>); </pre>
+<a name=3D""></a><pre>#include &lt;pthread.h&gt;
+
+pthread_mutex_t <var>mutex</var>;
+int <var>ret</var>;
+
+<var>ret</var> =3D pthread_mutex_unlock(&amp;<var>mutex</var>); /* release =
+the mutex */</pre>
+<p>
+<kbd><b>pthread_mutex_unlock()</b></kbd> releases the mutex object referenc=
+ed by <b>mutex</b>. The manner in which a mutex is released is dependent up=
+on the mutex's type attribute. If there are threads blocked on the mutex ob=
+ject referenced by <b>mutex</b> when <kbd><b>pthread_mutex_unlock()</b></kb=
+d> is called, resulting in the mutex becoming available, the scheduling pol=
+icy is used to determine which thread shall acquire the mutex. (In the case=
+ of <tt>PTHREAD_MUTEX_RECURSIVE</tt> mutexes, the mutex becomes available w=
+hen the count reaches zero and the calling 	thread no longer has any locks =
+on this mutex). </p>
+<a name=3D"sync-9"></a><h4 class=3D"sol">Return Values</h4><p>
+<kbd><b>pthread_mutex_unlock()</b></kbd> returns zero after completing succ=
+essfully. Any other returned value indicates that an error occurred. When a=
+ny of the following conditions occurs, the function fails and returns the c=
+orresponding value.</p>
+<dl>
+<dt>
+<br>
+<p>
+<tt><samp>EPERM</samp> <a name=3D"sync-ix306"></a></tt>
+</p>
+
+</dt>
+<dd>
+<p>The current thread does not own the mutex.</p>
+
+</dd>
+</dl>
+<a name=3D"sync-36993"></a><h2 class=3D"sol">Lock With a Nonblocking Mutex<=
+/h2>
+<a name=3D"sync-24727"></a><h3 class=3D"sol">pthread_mutex_trylock(3THR)</h=
+3>
+<a name=3D"sync-ix308"></a><p>Use <a href=3D"https://docs.oracle.com/docs/c=
+d/E19455-01/806-0630/6j9vkb8gs/index.html">pthread_mutex_trylock(3THR)</a> =
+to attempt to lock the mutex pointed to by <var>mutex</var>. (For Solaris t=
+hreads, see <a href=3D"https://docs.oracle.com/cd/E19455-01/806-5257/6je9h0=
+33t/index.html#sthreads-13267">"mutex_trylock(3THR)"</a>.)</p>
+<a name=3D""></a><pre>Prototype:
+int	pthread_mutex_trylock(pthread_mutex_t *<var>mutex</var>); </pre>
+<a name=3D""></a><pre>#include &lt;pthread.h&gt;
+
+pthread_mutex_t <var>mutex</var>;
+int <var>ret</var>;
+
+<var>ret</var> =3D pthread_mutex_trylock(&amp;<var>mutex</var>); /* try to =
+lock the mutex */</pre>
+<p>
+<kbd><b>pthread_mutex_trylock()</b></kbd> is a nonblocking version of <kbd>=
+<b>pthread_mutex_lock()</b></kbd>. If the mutex object referenced by <b>mut=
+ex</b> is currently locked (by any thread, including the  current thread), =
+the call returns immediately. Otherwise, the mutex is locked and the callin=
+g thread is the owner.</p>
+<a name=3D"sync-10"></a><h4 class=3D"sol">Return Values</h4><p>
+<kbd><b>pthread_mutex_trylock()</b></kbd> returns zero after completing suc=
+cessfully. Any other returned value indicates that an error occurred. When =
+any of the following conditions occurs, the function fails and returns the =
+corresponding value.</p>
+<dl>
+<dt>
+<br>
+<p>
+<tt><samp>EBUSY</samp> <a name=3D"sync-ix309"></a></tt>
+</p>
+
+</dt>
+<dd>
+<p>The mutex could not be acquired because the mutex pointed to by <var>mut=
+ex</var> was already locked.</p>
+
+</dd>
+</dl><dl>
+<dt>
+<br>
+<p>
+<tt><samp>EAGAIN</samp> <a name=3D"sync-ix310"></a></tt>
+</p>
+
+</dt>
+<dd>
+<p>The mutex could not be acquired because the maximum number of recursive =
+locks for <b>mutex</b> has been exceeded.</p>
+
+</dd>
+</dl><p>If the symbol <tt>_POSIX_THREAD_PRIO_INHERIT</tt> is defined, the m=
+utex is initialized with the protocol attribute value PTHREAD_PRIO_INHERIT,=
+ and the <var>robustness</var> argument of <kbd><b>pthread_mutexattr_setrob=
+ust_np()</b></kbd> is <tt>PTHREAD_MUTEX_ROBUST_NP</tt> the function fails a=
+nd returns:</p>
+<dl>
+<dt>
+<br>
+<p>
+<tt><samp>EOWNERDEAD</samp><a name=3D"indexterm-78"></a></tt>
+</p>
+
+</dt>
+<dd>
+<p>The last owner of this mutex died while holding the mutex. This mutex is=
+ now owned by the caller. The caller must attempt to make the state protect=
+ed by the mutex consistent. </p>
+
+<p>If the caller is able to make the state consistent, call <kbd><b>pthread=
+_mutex_consistent_np()</b></kbd> for the mutex and unlock the mutex. Subseq=
+uent calls to <kbd><b>pthread_mutex_lock()</b></kbd> will behave normally.<=
+/p>
+
+<p>If the caller is unable to make the state consistent, do not call <kbd><=
+b>pthread_mutex_init()</b></kbd> for the mutex, but unlock the mutex. Subse=
+quent calls to <kbd><b>pthread_mutex_trylock()</b></kbd> fail to acquire th=
+e mutex and return an <samp>ENOTRECOVERABLE</samp> error code.</p>
+
+<p>If the owner that acquired the lock with <samp>EOWNERDEAD</samp> dies, t=
+he next owner acquires the lock with <samp>EOWNERDEAD</samp>.</p>
+
+</dd>
+</dl><dl>
+<dt>
+<br>
+<p>
+<tt><samp>ENOTRECOVERABLE</samp><a name=3D"indexterm-79"></a></tt>
+</p>
+
+</dt>
+<dd>
+<p>The mutex you are trying to acquire is protecting state left irrecoverab=
+le by the mutex's previous owner that died while holding the lock. The mute=
+x has not been acquired. This condition can occur when the lock was previou=
+sly acquired with <samp>EOWNERDEAD</samp> and the owner was unable to clean=
+up the state and had unlocked the mutex without making the mutex state cons=
+istent.</p>
+
+</dd>
+<dt>
+<br>
+<p>
+<tt><samp>ENOMEM</samp><a name=3D"indexterm-80"></a></tt>
+</p>
+
+</dt>
+<dd>
+<p>The limit on the number of simultaneously held mutexes has been exceeded=
+.</p>
+
+</dd>
+</dl>
+<a name=3D"sync-79566"></a><h2 class=3D"sol">Destroy a Mutex</h2>
+<a name=3D"sync-20140"></a><h3 class=3D"sol">pthread_mutex_destroy(3THR)</h=
+3>
+<a name=3D"sync-ix311"></a><p>Use <a href=3D"https://docs.oracle.com/docs/c=
+d/E19455-01/806-0630/6j9vkb8gn/index.html">pthread_mutex_destroy(3THR)</a> =
+to destroy any state associated with the mutex pointed to by <var>mp</var>.=
+  (For Solaris threads, see <a href=3D"https://docs.oracle.com/cd/E19455-01=
+/806-5257/6je9h033t/index.html#sthreads-19118">"mutex_destroy(3THR)"</a>.)<=
+/p>
+<a name=3D""></a><pre>Prototype:
+int	pthread_mutex_destroy(pthread_mutex_t *<var>mp</var>); </pre>
+<a name=3D""></a><pre>#include &lt;pthread.h&gt;
+
+pthread_mutex_t <var>mp</var>;
+int <var>ret</var>;
+
+<var>ret</var> =3D pthread_mutex_destroy(&amp;<var>mp</var>); /* mutex is d=
+estroyed */</pre>
+<p>Note that the space for storing the mutex is not freed.</p>
+<a name=3D"sync-11"></a><h4 class=3D"sol">Return Values</h4><p>
+<kbd><b>pthread_mutex_destroy()</b></kbd> returns zero after completing suc=
+cessfully. Any other returned value indicates that an error occurred. When =
+any of the following conditions occur, the function fails and returns the c=
+orresponding value.</p>
+<dl>
+<dt>
+<br>
+<p>
+<tt><samp>EINVAL</samp> <a name=3D"sync-ix312"></a></tt>
+</p>
+
+</dt>
+<dd>
+<p>The value specified by <var>mp</var> does not refer to an initialized mu=
+tex object.</p>
+
+</dd>
+</dl>
+<a name=3D"sync-12"></a><h2 class=3D"sol">Mutex Lock Code Examples</h2>
+<p>
+<a href=3D"https://docs.oracle.com/cd/E19455-01/806-5257/6je9h032p/index.ht=
+ml#sync-83415">Example 4-1</a> shows some code fragments with mutex locking=
+.</p>
+<a name=3D"sync-83415"></a><hr><h5 class=3D"sol">Example 4-1  Mutex Lock Ex=
+ample</h5><br><a name=3D""></a><pre>#include &lt;pthread.h&gt;
+
+pthread_mutex_t count_mutex;
+long long count;
+
+void
+increment_count()
+{
+	    pthread_mutex_lock(&amp;count_mutex);
+    count =3D count + 1;
+	    pthread_mutex_unlock(&amp;count_mutex);
+}
+
+long long
+get_count()
+{
+    long long c;
+   =20
+    pthread_mutex_lock(&amp;count_mutex);
+	    c =3D count;
+    pthread_mutex_unlock(&amp;count_mutex);
+	    return (c);
+}<a name=3D"sync-ix313"></a><a name=3D"sync-ix314"></a>
+</pre>
+<hr>
+<p>The two functions in <a href=3D"https://docs.oracle.com/cd/E19455-01/806=
+-5257/6je9h032p/index.html#sync-83415">Example 4-1</a> use the mutex lock f=
+or different purposes. The <kbd><b>increment_count()</b></kbd> function use=
+s the mutex lock simply to ensure an atomic update of the shared variable. =
+The <kbd><b>get_count()</b></kbd> function uses the mutex lock to guarantee=
+ that the 64-bit quantity <var>count</var> is read atomically. On a 32-bit =
+architecture, a <code>long</code> <code>long</code> is really two 32-bit qu=
+antities.</p>
+<p>Reading an integer value is an atomic operation because integer is the c=
+ommon word size on most machines.</p>
+<a name=3D"sync-ex-3"></a><h3 class=3D"sol">Using Locking Hierarchies</h3>
+<p>You will occasionally want to access two resources at once. Perhaps you =
+are using one of the resources, and then discover that the other resource i=
+s needed as well. There could be a problem if two threads attempt to claim =
+both resources but lock the associated mutexes in different orders. For exa=
+mple, if the two threads lock mutexes 1 and 2 respectively, then a deadlock=
+<a name=3D"indexterm-81"></a> occurs when each attempts to lock the other m=
+utex. <a href=3D"https://docs.oracle.com/cd/E19455-01/806-5257/6je9h032p/in=
+dex.html#sync-ex-2">Example 4-2</a> shows possible deadlock scenarios.</p>
+<a name=3D"sync-ex-2"></a><hr><h5 class=3D"sol">Example 4-2  Deadlock</h5><=
+br><a name=3D""></a><a name=3D""></a><table width=3D"100%" cellpadding=3D"1=
+0" cellspacing=3D"0" border=3D"1">
+<thead>
+<tr>
+<th scope=3D"col" align=3D"left" valign=3D"bottom">
+<p> Thread 1&nbsp;</p>
+</th><th scope=3D"col" align=3D"left" valign=3D"bottom">
+<p> Thread 2&nbsp;</p>
+</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td align=3D"left" valign=3D"top">
+<p>
+<tt>pthread_mutex_lock(&amp;m1);</tt>
+</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p> &nbsp;</p>
+<p>/* use resource 1 */&nbsp;</p>
+<p>&nbsp;</p>
+<p>
+<tt>pthread_mutex_lock(&amp;m2);</tt>
+</p>
+<p> &nbsp;</p>
+<p>&nbsp;</p>
+<p>/* use resources1 and 2 */&nbsp;</p>
+<p>
+<tt>pthread_mutex_unlock(&amp;m2);</tt>
+</p>
+<p>
+<tt>pthread_mutex_unlock(&amp;m1);</tt>
+</p>
+</td><td align=3D"left" valign=3D"top">
+<p>
+<tt>pthread_mutex_lock(&amp;m2);</tt>
+</p>
+<p> &nbsp;</p>
+<p>&nbsp;</p>
+<p>/* use resource 2 */&nbsp;</p>
+<p>&nbsp;</p>
+<p>
+<tt>pthread_mutex_lock(&amp;m1);</tt>
+</p>
+<p> &nbsp;</p>
+<p>/* use resources 1 and 2 */&nbsp;</p>
+<p>
+<tt>pthread_mutex_unlock(&amp;m1);</tt>
+</p>
+<p>
+<tt>pthread_mutex_unlock(&amp;m2);</tt>
+</p>
+</td>
+</tr>
+
+</tbody>
+</table>
+<p>=20
+</p><p>=20
+</p><hr>
+<p>The best way to avoid this problem is to make sure that whenever threads=
+ lock multiple mutexes, they do so in the same order. When locks are always=
+ taken in a prescribed order, deadlock should not occur. This technique is =
+known as lock hierarchies: order the mutexes by logically assigning numbers=
+ to them. </p>
+<p>Also, honor the restriction that you cannot take a mutex that is assigne=
+d <b>n</b> when you are holding any mutex assigned a number greater than <b=
+>n</b>. </p>
+<p>However, this technique cannot always be used--sometimes you must take t=
+he mutexes in an order other than prescribed. To prevent deadlock in such a=
+ situation, use  <kbd><b>pthread_mutex_trylock()</b></kbd>. One thread must=
+ release its mutexes when it discovers that deadlock would otherwise be ine=
+vitable.</p>
+<a name=3D"sync-ex-13"></a><hr><h5 class=3D"sol">Example 4-3  Conditional L=
+ocking<a name=3D"sync-ix317"></a>
+</h5><br><a name=3D""></a><a name=3D""></a><table width=3D"100%" cellpaddin=
+g=3D"10" cellspacing=3D"0" border=3D"1">
+<thead>
+<tr>
+<th scope=3D"col" align=3D"left" valign=3D"bottom">
+<p> Thread 1&nbsp;</p>
+</th><th scope=3D"col" align=3D"left" valign=3D"bottom">
+<p> Thread 2&nbsp;</p>
+</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td align=3D"left" valign=3D"top">
+<p>
+<tt>pthread_mutex_lock(&amp;m1); pthread_mutex_lock(&amp;m2);</tt>
+</p>
+<p> &nbsp;</p>
+<p> &nbsp;</p>
+<p> &nbsp;</p>
+<p>&nbsp;</p>
+<p>/* no processing */&nbsp;</p>
+<p>&nbsp;</p>
+<p>
+<tt>pthread_mutex_unlock(&amp;m2);</tt>
+</p>
+<p>
+<tt>pthread_mutex_unlock(&amp;m1</tt>); </p>
+</td><td align=3D"left" valign=3D"top">
+<p>
+<tt>for (; ;)</tt>
+</p>
+<p>
+<tt>{          pthread_mutex_lock(&amp;m2);</tt>
+</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>
+<tt>if(pthread_mutex_trylock(&amp;m1)=3D=3D0)</tt>
+</p>
+<p>/* got it! */                                        &nbsp;</p>
+<p>
+<tt>break;</tt>
+</p>
+<p>/* didn't get it */&nbsp;</p>
+<p>
+<tt>pthread_mutex_unlock(&amp;m2);</tt>
+</p>
+<p>
+<tt> }</tt>
+</p>
+<p>/* get locks; no processing */&nbsp;</p>
+<p>
+<tt>pthread_mutex_unlock(&amp;m1);</tt>
+</p>
+<p>
+<tt>pthread_mutex_unlock(&amp;m2);</tt>
+</p>
+</td>
+</tr>
+
+</tbody>
+</table>
+<p>=20
+</p><p>=20
+</p><hr>
+<p>In <a href=3D"https://docs.oracle.com/cd/E19455-01/806-5257/6je9h032p/in=
+dex.html#sync-ex-13">Example 4-3</a>, thread 1 locks mutexes in the prescri=
+bed order, but thread 2 takes them out of order. To make certain that there=
+ is no deadlock, thread 2 has to take mutex 1 very carefully; if it were to=
+ block waiting for the mutex to be released, it is likely to have just ente=
+red into a deadlock with thread 1.</p>
+<p>To ensure this does not happen, thread 2 calls <kbd><b>pthread_mutex_try=
+lock()</b></kbd>, which takes the mutex if it is available. If it is not, t=
+hread 2 returns immediately, reporting failure. At this point, thread 2 mus=
+t release mutex 2, so that thread 1 can lock it, and then release both mute=
+x 1 and mutex 2. <a name=3D"sync-ix320"></a>
+</p>
+<a name=3D"sync-83550"></a><h3 class=3D"sol">Nested Locking With a Singly L=
+inked List</h3>
+<p>
+<a href=3D"https://docs.oracle.com/cd/E19455-01/806-5257/6je9h032p/index.ht=
+ml#sync-78558">Example 4-4</a> and <a href=3D"https://docs.oracle.com/cd/E1=
+9455-01/806-5257/6je9h032p/index.html#sync-94944">Example 4-5</a> show how =
+to take three locks at once, but prevent deadlock by taking the locks in a =
+prescribed order.</p>
+<a name=3D"sync-78558"></a><hr><h5 class=3D"sol">Example 4-4  Singly Linked=
+ List Structure</h5><br><a name=3D""></a><pre>typedef struct node1 {
+    int value;
+    struct node1 *link;
+    pthread_mutex_t lock;
+} node1_t;
+
+node1_t ListHead;</pre>
+<hr>
+<p>This example uses a singly linked list structure with each node containi=
+ng a mutex. To remove a node from the list, first search the list starting =
+at <var>ListHead</var> (which itself is never removed) until the desired no=
+de is found. </p>
+<p>To protect this search from the effects of concurrent deletions, lock ea=
+ch node before any of its contents are accessed. Because all searches start=
+ at <var>ListHead</var>, there is never a deadlock because the locks are al=
+ways taken in list order.</p>
+<p>When the desired node is found, lock both the node and its predecessor s=
+ince the change involves both nodes. Because the predecessor's lock is alwa=
+ys taken first, you are again protected from deadlock. <a href=3D"https://d=
+ocs.oracle.com/cd/E19455-01/806-5257/6je9h032p/index.html#sync-94944">Examp=
+le 4-5</a> shows the C code to remove an item from a singly linked list.</p=
+>
+<a name=3D"sync-94944"></a><hr><h5 class=3D"sol">Example 4-5  Singly Linked=
+ List With Nested Locking</h5><br><a name=3D""></a><pre>node1_t *delete(int=
+ value)
+{
+    node1_t *prev, *current;
+
+    prev =3D &amp;ListHead;
+    pthread_mutex_lock(&amp;prev-&gt;lock);<a name=3D"sync-ix321"></a>
+    while ((current =3D prev-&gt;link) !=3D NULL) {
+        pthread_mutex_lock(&amp;current-&gt;lock);
+        if (current-&gt;value =3D=3D value) {
+            prev-&gt;link =3D current-&gt;link;
+            pthread_mutex_unlock(&amp;current-&gt;lock);<a name=3D"sync-ix3=
+22"></a>
+            pthread_mutex_unlock(&amp;prev-&gt;lock);
+            current-&gt;link =3D NULL;
+            return(current);
+        }
+        pthread_mutex_unlock(&amp;prev-&gt;lock);
+        prev =3D current;
+    }
+    pthread_mutex_unlock(&amp;prev-&gt;lock);
+    return(NULL);
+}</pre>
+<hr>
+<a name=3D"sync-14"></a><h3 class=3D"sol">Nested Locking With a Circular Li=
+nked List</h3>
+<p>
+<a href=3D"https://docs.oracle.com/cd/E19455-01/806-5257/6je9h032p/index.ht=
+ml#sync-50939">Example 4-6</a> modifies the previous list structure by conv=
+erting it into a circular list. There is no longer a distinguished head nod=
+e; now a thread might be associated with a particular node and might perfor=
+m operations on that node and its neighbor. Note that lock hierarchies do n=
+ot work easily here because the obvious hierarchy (following the links) is =
+circular. </p>
+<a name=3D"sync-50939"></a><hr><h5 class=3D"sol">Example 4-6  Circular Link=
+ed List Structure</h5><br><a name=3D""></a><pre>typedef struct node2 {
+    int value;
+    struct node2 *link;
+    pthread_mutex_t lock;
+} node2_t;</pre>
+<hr>
+<p>Here is the C code that acquires the locks on two nodes and performs an =
+operation involving both of them.      <a name=3D"sync-ix323"></a> <a name=
+=3D"sync-ix324"></a> <a name=3D"sync-ix325"></a>
+</p>
+<a name=3D"sync-ex-15"></a><hr><h5 class=3D"sol">Example 4-7  Circular Link=
+ed List With Nested Locking</h5><br><a name=3D""></a><a name=3D""></a><tabl=
+e width=3D"100%" cellpadding=3D"10" cellspacing=3D"0" border=3D"1">
+<thead>
+<tr>
+<th scope=3D"col" align=3D"left" valign=3D"bottom"><a name=3D""></a>
+<pre>void Hit Neighbor(node2_t *me) {
+    while (1) {
+        pthread_mutex_lock(&amp;me-&gt;lock);
+        if (pthread_mutex_lock(&amp;me-&gt;link-&gt;lock)!=3D 0) {
+            /* failed to get lock */            =20
+            pthread_mutex_unlock(&amp;me-&gt;lock);  <a name=3D"sync-ix327"=
+></a>           =20
+            continue;        =20
+        }        =20
+        break;    =20
+    }    =20
+    me-&gt;link-&gt;value +=3D me-&gt;value;    =20
+    me-&gt;value /=3D2;    =20
+    pthread_mutex_unlock(&amp;me-&gt;link-&gt;lock);    =20
+    pthread_mutex_unlock(&amp;me-&gt;lock);
+}<a name=3D"sync-ix326"></a>
+</pre>
+
+</th>
+</tr>
+
+</thead>
+<tbody>
+<tr>
+<td align=3D"left" valign=3D"top">&nbsp;</td>
+</tr>
+
+</tbody>
+</table>
+<p>=20
+</p><p>=20
+</p><hr>
+</div><div class=3D"d8 d8v1" style=3D"margin: 10px;"><div class=3D"d8w1"><d=
+iv class=3D"d8w2"><div class=3D"d8w3"><div class=3D"d8w4"><ul><li class=3D"=
+d8left"><a href=3D"https://docs.oracle.com/cd/E19455-01/806-5257/6je9h032o/=
+index.html"><em>Previous</em>: Mutual Exclusion Lock Attributes</a></li><li=
+ class=3D"d8right"><a href=3D"https://docs.oracle.com/cd/E19455-01/806-5257=
+/6je9h032q/index.html"><em>Next</em>: Condition Variable Attributes</a></li=
+></ul></div></div></div></div></div><div class=3D"a5 a5v0" id=3D"a5">
+<ul>
+    <li class=3D"copyright">=C2=A9 2010, Oracle Corporation and/or its affi=
+liates</li>
+</ul>
+</div>
+</div><div id=3D"footer-banner" style=3D"display: inline-block;"><ul><li><d=
+iv id=3D"teconsent" consent=3D"undefined" aria-label=3D"Open Cookie Prefere=
+nces Modal" class=3D"truste_caIcon_display" role=3D"complementary"><a role=
+=3D"link" id=3D"icon-id0613256592364537" tabindex=3D"0" lang=3D"zh" aria-ha=
+spopup=3D"dialog" aria-label=3D"Cookie Preferences, opens a dedicated popup=
+ modal window" class=3D"truste_cursor_pointer">Cookie =E5=96=9C=E5=A5=BD=E8=
+=AE=BE=E7=BD=AE</a></div></li><li><a id=3D"adchoices" class=3D"new-window" =
+target=3D"_blank" href=3D"https://www.oracle.com/legal/privacy/marketing-cl=
+oud-data-cloud-privacy-policy.html#12">Ad Choices</a></li></ul></div><ifram=
+e name=3D"trustarc_notice" id=3D"trustarcNoticeFrame" title=3D"Trustarc Cro=
+ss-Domain Consent Frame" src=3D"cid:frame-5E9773ED0EFE0569A185662B14B1884B@=
+mhtml.blink" style=3D"display: none;"></iframe></body></html>
+------MultipartBoundary--3UIDItEK3ZCgUrKcSUlTpXKHaaYYJOJzcbbL45Xb4T----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-69fb18b1-9cba-4d78-b8dc-cf28f2273a89@mhtml.blink
+
+@charset "utf-8";
+
+.truste_caIcon_display { display: inline-block !important; }
+------MultipartBoundary--3UIDItEK3ZCgUrKcSUlTpXKHaaYYJOJzcbbL45Xb4T----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-7ea730d6-42b1-4124-867b-68d4b4aff3b1@mhtml.blink
+
+@charset "utf-8";
+
+.truste_cursor_pointer { cursor: pointer; }
+
+.truste_border_none { border: none; }
+------MultipartBoundary--3UIDItEK3ZCgUrKcSUlTpXKHaaYYJOJzcbbL45Xb4T----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-80fb7080-9ad7-4a8c-adfd-0935d9572d8e@mhtml.blink
+
+@charset "utf-8";
+
+#footer-banner ul li:nth-child(2) { margin-left: 0px; }
+
+#footer-banner { z-index: 9999; position: fixed; margin: 0px auto; bottom: =
+0px; left: 0px; right: 0px; border-top: 1px solid rgb(172, 183, 191); color=
+: rgb(25, 88, 170); padding: 0em 1em; text-align: center; line-height: 15px=
+; font-weight: normal; font-family: Arial; clear: both; background-color: r=
+gb(235, 235, 235) !important; font-size: 12px !important; }
+
+#teconsent { display: inline-block; }
+
+#footer-banner ul { list-style: none; padding: 0px; margin: 0px 20px 0px 0p=
+x; font-size: 12px !important; }
+
+#footer-banner li { display: inline-block; }
+
+#footer-banner li + li::before { content: "|"; margin-right: 4px; margin-le=
+ft: 4px; color: rgb(170, 170, 170); }
+
+#footer-banner a { color: rgb(25, 88, 170); text-decoration: none; font-siz=
+e: 12px !important; }
+
+#footer-banner a:focus, #footer-banner a:hover { color: rgb(25, 88, 170); t=
+ext-decoration: underline; }
+------MultipartBoundary--3UIDItEK3ZCgUrKcSUlTpXKHaaYYJOJzcbbL45Xb4T----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://docs.oracle.com/docs/dcommon/dsc/css/default.css
+
+@charset "utf-8";
+=0A
+------MultipartBoundary--3UIDItEK3ZCgUrKcSUlTpXKHaaYYJOJzcbbL45Xb4T----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://docs.oracle.com/docs/dcommon/dsc/css/www.css
+
+@charset "utf-8";
+=0A
+------MultipartBoundary--3UIDItEK3ZCgUrKcSUlTpXKHaaYYJOJzcbbL45Xb4T----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://docs.oracle.com/docs/dcommon/dsc/css/dsc.css
+
+@charset "utf-8";
+=0A
+------MultipartBoundary--3UIDItEK3ZCgUrKcSUlTpXKHaaYYJOJzcbbL45Xb4T----
+Content-Type: text/html
+Content-ID: <frame-5E9773ED0EFE0569A185662B14B1884B@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://consent.trustarc.com/get?name=crossdomain.html&domain=oracle.com
+
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; charset=
+=3Dwindows-1252"></head><body></body></html>
+------MultipartBoundary--3UIDItEK3ZCgUrKcSUlTpXKHaaYYJOJzcbbL45Xb4T------

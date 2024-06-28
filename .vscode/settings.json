@@ -4,4 +4,7 @@
     "esbonio.sphinx.confDir": "",
     "svg.preview.background": "transparent",
     "cmake.configureOnOpen": false,
+    "files.associations": {
+        "unistd.h": "c"
+    },
 }
