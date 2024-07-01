@@ -140,7 +140,82 @@ UCI将自动配置成如下内容：
     myservice.hello.name=Joost
     myservice.hello.every='5'
 
+亦可通过 uci 获取单个选项:
 
+::
+    
+    uci get myservice.hello.name
+
+亦可通过 uci 设置单个选项:
+
+::
+    
+    uci set myservice.hello.name=Knight
+    uci commit
+
+5. 在procd脚本中加载服务配置
+
+::
+
+    #!/bin/sh /etc/rc.common
+    USE_PROCD=1
+    START=95
+    STOP=01
+
+    CONFIGURATION=myservice
+
+    start_service() {
+        #读配置
+        config_load "${CONFIGURATION}"
+        local name
+        local every
+
+        config_get name hello name
+        config_get every hello every
+
+        procd_open_instance
+        #将配置传递给启动脚本
+        procd_set_param command /bin/sh "/var/myscript.sh" "$name" "$every"
+        procd_set_param file /etc/config/myservice
+        procd_set_param stdout 1
+        procd_set_param stderr 1
+        procd_close_instance
+    }
+
+重其服务以应用配置：
+
+::
+
+    /etc/init.d/myservice reload
+
+6. 其他的高级选项
+
+respawn功能，发生意外断开时以重启
+
+::
+
+    procd_set_param respawn \
+        ${respawn_threshold:-3600} \
+        ${respawn_timeout:-5} ${respawn_retry:-5}
+
+pidfile，储存pid
+
+::
+
+    procd_set_param pidfile $PIDFILE
+
+env vars，传递环境变量到进程中
+
+::
+
+    procd_set_param env A_VAR=avalue
+
+
+ulimit，进程资源限制
+
+::
+
+    procd_set_param limits core="unlimited"
 
 https://openwrt.org/docs/guide-developer/procd-init-script-example
 https://openwrt.org/docs/guide-developer/procd-init-scripts

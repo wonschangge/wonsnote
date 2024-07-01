@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wons' Economy</title>
+</head>
+<body>
+    x:
+    <input type="range" id="x" value="10000" min="10000" max="100000" step="1000" 
+        oninput="this.nextElementSibling.value = this.value;calc()">
+    <output>10000</output>
+
+    y:
+    <input type="range" id="y" value="0.03" min="0.03" max="0.5" step="0.01" 
+        oninput="this.nextElementSibling.value = this.value;calc()">
+    <output>0.03</output>
+
+    z:
+    <input type="range" id="z" value="200" min="50" max="1000" step="50" 
+        oninput="this.nextElementSibling.value = this.value;calc()">
+    <output>200</output>
+
+    d:
+    <input type="range" id="d" value="360" min="30" max="7200" step="30" 
+        oninput="this.nextElementSibling.value = this.value;calc()">
+    <output>360</output>
+
+
+    <div>
+        <p>s: <span id="s"></span></p>
+        <p>sx: <span id="sx"></span></p>
+        <p>howd: <span id="howd"></span></p>
+        <p>positive: <span id="positive"></span></p>
+        <p>negative: <span id="negative"></span></p>
+    </div>
+
+    <script>
+        function calc() {
+            vx = Number(x.value)
+            vy = Number(y.value) / 365
+            vz = Number(z.value)
+            vd = Number(d.value)
+            vs = 0
+            vsx = 0
+            vdelta = 0
+            console.log(vx,vy,vz,vd)
+            for(i=1; i <= vd; i++) {
+                vsx = (vx + vz * (i-1));
+                vdelta=vsx*vy;
+                vs += vdelta;
+                // console.log(i,':',vs,':',vz-vdelta)
+            }
+            s.textContent = vs
+            sx.textContent = vsx
+            positive.textContent = vdelta
+            negative.textContent = vz - vdelta
+
+            vs = 0
+            vsx = 0
+            for(i=1;;i++) {
+                vsx = (vx + vz * (i-1));
+                vdelta=vsx*vy;
+                if(vdelta > vz) break;
+            }
+            howd.textContent = i + ';' + i / 365;
+        }
+        calc()
+    </script>
+
+</body>
+</html>
