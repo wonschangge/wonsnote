@@ -1,4 +1,30 @@
-capacitor源码总结.rst
+capacitor源码总结
+==========================
+
+通信桥交互
+--------------------
+
+js往java发消息:
+
+native-bridge.js:::postToNative、androidBridge.postMessage
+
+androidBridge.postMessage 是 MessageHandler 往 webView 里添加的接口(addJavascriptInterface)
+
+MessageHandler.java:::MessageHandler postMessage、callPluginMethod
+
+callPluginMethod会使用到PluginCall，并通过responseMessage反馈最终结果。
+
+responseMessage通过 webView.post、webView.evaluateJavascript(runScript, null); 的方式 eval 调用 webview 中的全局对象下的方法，
+
+来传递处理后的数据。
+
+所以JsBridge的速率：
+
+* js->java: 就在于测试 addJavascriptInterface 定义的方法接口的速度。
+* java->js: 就在于测试 evaluateJavascript 执行的速度。
+
+测试该接口的速度，也可以称为压力测试。
+
 
 ## Bridge LifeCycle
 

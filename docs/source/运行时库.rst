@@ -1,0 +1,41 @@
+运行时库
+===========
+
+标准C库：
+
+- libc
+- libm
+- libpthread
+- libssl
+- libutil
+- libstdc++
+
+网络服务库：
+
+- liblw
+- libnl
+- libnsl
+- libnss
+- libmdnssd
+- libresolv
+
+其他服务库：
+
+- alsa, Advanced Linux Sound Architecture
+- wpa_supplicant, 
+
+
+
+
+
+查找动态库
+--------------
+
+ldconfig -p | grep ...
+
+
+查看动态库导出函数列表
+------------------------
+
+1. objdump -tT xxx.so
+2. nm -D xxx.so

@@ -1,0 +1,38 @@
+推荐使用和学习的构建系统
+===============================
+
+1. Meson Build 系统
+----------------------
+
+生命力：强
+
+官网：https://mesonbuild.com/index.html
+
+含有快速上手的例子，文档友好，使用简单。
+
+基于python，基于ninja。
+
+使用其的知名项目：QEMU、Bzip2、GTK+、JSONCpp、libfuse、OpenH264、Wayland、ZStandard
+
+
+2. CMake
+----------------------
+
+
+生命力：强
+
+官网入门：https://cmake.org/getting-started/
+
+C++的事实标准，
+
+教程详细。
+
+
+
+3. Autotools
+------------------------
+
+生命力：弱
+
+
+又名 GNU构建系统，含autoconf、automake、libtool三个工具。

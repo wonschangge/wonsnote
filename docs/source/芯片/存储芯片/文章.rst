@@ -54,3 +54,53 @@ eMMC常用在手机、电脑、汽车电子、高性能Embedded。
 1. NVRAM(EEPROM)非易失性RAM（可读可写）————存储如 U-Boot SPL(Secondary Program Loader)
 2. RAM(DDR3 SDRAM)————运行从Flash复制过来的U-Boot/Kernel...
 3. Flash(SPI NAND/EMMC) ———— 包含ROM内容(uboot,kernel,dtb,rootfs等只读)和UserData(可读写)内容
+
+
+
+举个例子，全志在准备其嵌入式芯片的u-boot spl时（它内部定义为boot0模块），会为3种目标存储介质打包镜像，包括：
+
+1. boot0_nand.fex ---------- nand方案使用的boot0
+2. boot0_sdcard.fex -------- mmc方案
+3. boot0_spinor spi -------- nor方案
+
+u-boot模块，则只含2种：
+
+1. u-boot.fex -------------- nand/mmc方案
+2. u-boot-spinor.fex ------- nor方案
+
+.. note:: 全志的含安全方案的u-boot spl和u-boot 分别叫toc0和toc1。
+
+这里的 NAND/EMMC/SPINOR 具体来说是三类：
+
+1. (SPI) NAND Flash: 便宜、相对小，目前最大常见1GB。
+2. (SPI) NOR FLASH: 贵、相对小，目前最大常见256MB。
+3. eMMC: 贵、快，板载，目前最大常见2TB，iPhone的存储使用的方案。
+4. eMMC-microSD，大、灵活，目前最大常见2TB，树莓派开发板存储使用的方案。
+5. 还有 EEPROM，小只有以字节计的大小。
+
+其中 Nand 的颗粒分单层（SLC）、双层（MLC）、三层（TLC）、四层（FLC），层数越小质量越好。
+
+其中全志对 Nand 介质有两套解决方案，NFTL方案（大容量）和UBI方案（小容量）。
+
+- NFTL: Nand Flash Translation Layer，屏蔽nand特性，对上呈现块设备
+- UBI
+
+在 NFTL 驱动中会预留一部分空间做算法和关键数据保存，预留空间大致为1/10～1/8的可用空间，可用空间是指剔除出厂坏块之外的空间。
+由于每一个Flash的出厂坏块数量不尽相同，因此最终呈现给用户的可用空间不尽相同。Nand的磨损平衡、坏块管理等特性都由NFTL驱动实现。
+由NFTL驱动保证用户数据的稳定，用户可将其按块设备使用。
+
+UBI子系统的层次结构，最下层 Flash及Flash驱动，其次MTD子系统封装Flash向上提供统一接口，其次UBI子系统屏蔽Nand特性并提供管理，
+其次UBIFS提供ubifs文件系统。
+
+.. note:: MMC可简单理解成是 NandFlash + 控制器 + NFTL。
+
+.. note:: Nand/Nor Flash 亦可加其他专门控制器，SPI为最常见的形式。
+
+Nor Flash目前很难实现安全更新，由于存储特性的关系，只保存了一份boot0和uboot，更新时掉电可能导致无法启动。
+
+如何安全更新U-Boot SPL和U-Boot？
+
+可能的损坏：存储颗粒坏、断电
+
+前提条件，flash中存有不止一份，启动流程支持校验并选择完整的boot0/uboot启动，逐次尝试，更新时也是逐次更新。
+

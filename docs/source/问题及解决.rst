@@ -1,0 +1,8 @@
+问题及解决
+==============================
+
+* minicom无法输入问题的解决办法
+
+  * https://blog.csdn.net/chengde6896383/article/details/105551893
+  
+  * 梗概: 需关闭minicom缺省的 Hardware Flow Control
