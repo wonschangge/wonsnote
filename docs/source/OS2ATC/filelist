@@ -1,0 +1,138 @@
+.
+├── 2021
+│   ├── 主会场-宋吉科-腾讯云异构计算技术演进之路v1.pdf
+│   ├── 主会场-糜泽羽-os2atc-20211226.pdf
+│   ├── 主会场-陆游游-闪存系统一致性的新探索.pdf
+│   ├── 主会场-马涛-云计算与操作系统产业的发展.pdf
+│   ├── 云原生-张苗磊_os2atc_f1.pdf
+│   ├── 云原生-敬锐-rubik-云原生资源利用率提升实践.pdf
+│   ├── 云原生-朱鹏-阿里云FaaS架构设计-云原生-20211226.pdf
+│   ├── 云原生-梁颖健-LAXCUS分布式操作系统-从0到1的实践.pdf
+│   ├── 云原生-胡玉溪-OS2ATC-KeenTune.pdf
+│   ├── 云原生-葛旭阳-nydus-v6介绍-os2atc-clean.pdf
+│   ├── 内核-宋有泉@英特尔.pdf
+│   ├── 内核-廖肇燕@阿里.pdf
+│   ├── 内核-曾波@翼辉信息.pdf
+│   ├── 内核-杨一聪-宋宝华@海思.pdf
+│   ├── 内核-王鹏-第二版@阿里.pptx.pdf
+│   ├── 内核-蒋彪@腾讯.pdf
+│   ├── 内核-贺勇@蚂蚁.pdf
+│   ├── 应用生态-张继德-DTK过去和未来.pdf
+│   ├── 应用生态-徐晓晶-边缘算力网络的探索与实践.pdf
+│   ├── 应用生态-李强-edgeros万物互联时代的智能操作系统.pdf
+│   ├── 应用生态-熊谱翔-RT-Thread Smart生态之路.pdf
+│   ├── 应用生态-王鑫-WebAssembly标准发展与展望-CHINA-OS.pdf
+│   ├── 应用生态-肖翔-XiaomiVela.pdf
+│   ├── 机密计算-张家乐-一种机密计算远程证明通用框架.pdf
+│   ├── 机密计算-李隆-Verifiable Computation.pdf
+│   ├── 机密计算-章张楷-通用机密计算平台技术初探.pdf
+│   ├── 机密计算-陈海华-鲲鹏芯片新技术助力机密计算(os2act大会分享).pdf
+│   ├── 硬件-张权路_AutoMLSystem.pdf
+│   ├── 硬件-毛熠璐-Cloud AIoT Native：HaaS 2.0物联网设备开发框架-final.pdf
+│   ├── 硬件-计算所-徐易难-香山：开源高性能RISC-V处理器.pdf
+│   ├── 硬件-黄朝波-软硬件融合-从DPU到超异构计算-矩向科技.pdf
+│   ├── 编程技术-Sun Chan_gp-rel-opt.pdf
+│   ├── 编程技术-冷静文_基于数据流分析的神经网络稀疏性探索.pdf
+│   ├── 编程技术-刘颖_申威异构众核处理器的OpenCL优化技术.pdf
+│   ├── 编程技术-孙浩_PHP JIT AArch64 backend Implementation-HaoSun-ArmChina.pdf
+│   ├── 编程技术-张超_Python在大数据领域实践和思考.pdf
+│   ├── 编程技术-汤伟_TypeScript到WebAssembly的实践和探索_os2atc_final.pdf
+│   ├── 编程技术-邢明杰_RISC-V向量编程及编译支持-OS2ATC.pdf
+│   ├── 编程技术-魏伟_毕昇编译器面向高性能计算的技术探索与实践v1.0.pdf
+│   ├── 虚拟化-刘肄-iommufd - os2atc-1.pdf
+│   ├── 虚拟化-周鹏-并发高负载场景下的负载均衡优化5.9.pdf
+│   ├── 虚拟化-朱辉-Kata Containers+UniKernel+WebAssembly-runtime Demo.pdf
+│   ├── 虚拟化-李佳杰-StratoVirt：用rust重构虚拟化基础设施的技术探索.pdf
+│   ├── 虚拟化-郁磊-Java协程—过去，现在与未来.pdf
+│   ├── 虚拟化-陆志刚-腾讯云软硬一体虚拟化技术实践.pdf
+│   └── 车载OS-赖建新-OS2ATC2021-MCS-JianXinLai-Xcalibyte.pdf
+├── 2021.list
+├── 2022
+│   ├── AIOT-内核-OS2ATC-王荣巍.pdf
+│   ├── AIOT-内核-刘寿永-智能操作系统助力产业升级的探索与实践-刘寿永.pdf
+│   ├── AIOT-内核-吴一昊-调度器热升级 - OS2ATC.pdf
+│   ├── AIOT-内核-郭占鑫-RT-Thread助力AIOT应用高效开发.pdf
+│   ├── AIOT-内核-郭锦辉、李喆-面向云服务的内核热升级探索.pdf
+│   ├── AIOT-内核-魏勇军-可编程内核技术进展和未来畅想v2.pdf
+│   ├── 主会场-kernel-fuzzing-张超.pdf
+│   ├── 主会场-OS Conference-顾荣辉.pdf
+│   ├── 主会场-Rust Monitor 形式化验证-刘双-V2.pdf
+│   ├── 主会场-基于推导的人工智能编译器-v3-翟季东.pdf
+│   ├── 主会场-机器之心-李戈.pdf
+│   ├── 云原生虚拟化-何荣光-VIrtio-ISM VM容器间动态安全内存共享_20230328_113546.pdf
+│   ├── 云原生虚拟化-吴超-Upcall_ Dragonball沙箱融合设计通信机制解读.pdf
+│   ├── 云原生虚拟化-周权伟、吴超-RunD 过去、现在、未来演讲.pdf
+│   ├── 云原生虚拟化-宋顾杨-Ray-os2atc2023-v3.pdf
+│   ├── 云原生虚拟化-曾敬翔-云服务器内存多级卸载方案.pdf
+│   ├── 云原生虚拟化-谢仲天-TencentOS Server云原生技术实践v2-p.pdf
+│   ├── 云原生虚拟化-陈晨-DeepFlow“云原生时代”下可观测性的全栈、自动化统一平台.pdf
+│   ├── 学生会场-OS2ATC-叶自立-v1_20230328_114013.pdf
+│   ├── 学生会场-os2atc-学生会场-张艺枫.pdf
+│   ├── 学生会场-林宇轩-NPUcore分享内容.pdf
+│   ├── 学生会场-贾越凯-ArceOS.html
+│   ├── 学生会场-邢其正-Koopa-开源的本科生编译实践教学方案_20230328_114018.pdf
+│   ├── 学生会场-陈志扬-OSATC-20230325-1807.pdf
+│   ├── 学生会场-陈林峰-北京理工大学_20230328_114009.pdf
+│   ├── 学生会场-齐呈祥-hypocaust分享_20230328_114010.pdf
+│   ├── 汽车软件-姜垚-开源如何赋能软件定义汽车3.26 Rose Chiang.pdf
+│   ├── 汽车软件-姜征然-自动驾驶操作系统平台化探索.pdf
+│   ├── 汽车软件-庄天然-车用操作系统发展趋势_CAIC_OS2ATC.pdf
+│   ├── 汽车软件-杨波涛 - 从域融合Hypervisor出发思考汽车操作系统技术路线和发展策略V1.2.pdf
+│   ├── 汽车软件-肖堃-车用底层操作系统的分析与演进方向思考20230326.pdf
+│   ├── 汽车软件-谢宝友-打造自主可控的汽车基础操作系统-OS2ATC演讲版.pdf
+│   ├── 硬件-唐丹-推动开源芯片生态发展.pdf
+│   ├── 硬件-董一帆_High performance RISC-V compiler based on Open64.pdf
+│   ├── 硬件-连志安_ArkTS框架：在ARM、RISC-V指令集架构上跑Openharmony应用.pdf
+│   ├── 硬件-陈华才_龙芯架构与Linux内核_16_9.pdf
+│   ├── 硬件-饶磊_OS2ATC-NVMe VFIO live migration-leirao@intel.pdf
+│   ├── 编程技术-张继德-Qt+RHI+-+（deepin）_20230322_131331.pdf
+│   ├── 编程技术-张超-KylinOS_sdk&IDE分享v3 .pdf
+│   ├── 编程技术-徐鹏飞-KCL+-+一种用于大规模配置和策略管理的声明式编程语言.pdf
+│   ├── 编程技术-李弘博-OS2ATC_TencentOS服务器QoS技术的演进 李弘博.pdf
+│   ├── 编程技术-梁开祝-深入理解OpenHarmony的驱动框架--润开鸿-20230320.pdf
+│   ├── 编程技术-石梦南-可视化编程及其与AI的结合-睿珀智能.pdf
+│   ├── 编程技术-祁宇-基于C++20+协程的C++20+高性能基础库--雅兰亭库助力开发者构建高性能应用.pdf
+│   └── 编程技术-秦蔚-小米Vela在IOT操作系统领域中的技术实践和探索-秦蔚.pdf
+├── 2022.list
+├── 2024
+│   ├── Chen yu - Linux scheduler scalability on many core system.pdf
+│   ├── os2atc何亮亮-自动驾驶基础软件的机遇与挑战.pdf
+│   ├── 丁尔男-PLOC社区与《国产编程语言蓝皮书》.pdf
+│   ├── 丁雪峰-AI+虚拟化时代下 virtio-net 的发展与展望(2).pdf
+│   ├── 刘政宁-基于计图框架的代码大模型.pdf
+│   ├── 吴昊-Secure IO for Virtualization-Based Trusted Execution Environment.pdf
+│   ├── 唐洪雨 - LLM 辅助翻译 C 软件到 Rust 软件.pdf
+│   ├── 尹杰-元OS架构：面向多场景交付的下一代Kit化操作系统内核架构思考.pdf
+│   ├── 庄秋彬-RISC-V编译器优化探索_os2atc_spacemit_.pdf
+│   ├── 张锐-Intel Low Power Mode Daemon on Hybrid CPUs.pdf
+│   ├── 张雄-KVM直通式虚拟PMU _052005.pdf
+│   ├── 时奎亮-oc维稳之道.pdf
+│   ├── 李弘宇-RROS：混合异构内核操作系统.pdf
+│   ├── 李枫-再论D作为一种更好的操作系统编程语言.pdf
+│   ├── 李锭-下一代智能化终端入侵检测与溯源系统.pdf
+│   ├── 杨畅-deepin的RISC-V_LoongArch 支持：当我们谈论桌面生态时，我们在讨论什么.pdf
+│   ├── 林会杰-多模态生成式AI的应用与挑战.pdf
+│   ├── 柴树杉-面向webassembly的编程语言探索实践——以凹语言和KCL为例.pdf
+│   ├── 王潇-从Linux优化角度探索RISCV性能与兼容性的平衡.pdf
+│   ├── 王禹-开源智能座舱：驱动汽车智能化的开放式未来.pdf
+│   ├── 王经纬-openEuler RISC-V 的进展与创新.pdf
+│   ├── 石磊-组件化多模式操作系统内核的实践v.04.pdf
+│   ├── 网易数帆云原生中间件平台解决方案.pdf
+│   ├── 翟明杰-RISC-V集群生态及应用.pdf
+│   ├── 胡瑜-越野自动驾驶感知技术挑战与进展_20240330.pdf
+│   ├── 董俊杰-基于Xiaomi Vela打造手表快应用的最佳实践.pdf
+│   ├── 薛淑明-HVML编程语言及其应用的跨端运行技术.pdf
+│   ├── 许海波-Linux RISC-V ACPI support.pdf
+│   ├── 贺朝阳-智群系统在无人设备上的应用.pdf
+│   ├── 郑幼戈-AI时代对操作系统交互的影响-演讲版.pdf
+│   ├── 陆伟宁-LLVM on LoongArch.pdf
+│   ├── 陈文光-国产平台上训练大模型的系统挑战-osatc.pdf
+│   ├── 陈英豪-LLM 辅助翻译 C 代码到 Rust 代码.pdf
+│   ├── 陈诗雁-AI在操作系统运维中的应用和实践.pdf
+│   ├── 陈霖翔-openkylin wayland合成器wlcom分析.pdf
+│   └── 黄瀛-PCP auto-tuning.pdf
+├── 2024.list
+├── down.sh
+└── README
+
+4 directories, 132 files

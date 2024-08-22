@@ -3,7 +3,23 @@
 export PATH="/opt/aarch64-linux-musl-cross/bin:${PATH}"
 # crosstool-ng
 export PATH="${HOME}/WORK/crosstool-ng/crosstool-ng-1.26.0/bin:${PATH}"
-export PATH="${HOME}/x-tools/aarch64-rpi4-linux-gnu/bin/:$PATH"
 
-# 每次编译时配置此 prefix
-export CROSS_COMPILE=aarch64-rpi4-linux-gnu-
+
+# eg1:
+# export PATH="${HOME}/x-tools/aarch64-rpi4-linux-gnu/bin/:$PATH"
+# export CROSS_COMPILE=aarch64-rpi4-linux-gnu-
+
+# eg2:
+export PATH="${HOME}/x-tools/arm-unknown-linux-musleabi/bin/:$PATH"
+export CROSS_COMPILE=arm-unknown-linux-musleabi-
+
+./configure \
+    --target=arm-unknown-linux \
+    --host=x86_64-pc-linux-gnu \
+    --with-build-cc=arm-unknown-linux-musleabi-gcc \
+    --with-build-cflags= \
+    --with-build-cpp=arm-unknown-linux-musleabi-g++ \
+    --with-build-cppflags='-std=c++11' \
+    --with-shared  \
+    --disable-unicode
+
