@@ -32,7 +32,7 @@ echo "CONFIG_SYSROOT=\"$SYSROOT\"" >> configs/android2_defconfig
 
 git diff configs/android2_defconfig
 
-2.替换ar和nm工具
+# 2.替换ar和nm工具
 sed -i 's/$(CROSS_COMPILE)ar/llvm-ar/g' Makefile
 sed -i 's/$(CROSS_COMPILE)strip/llvm-strip/g' Makefile
 

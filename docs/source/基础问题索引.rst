@@ -1,0 +1,18 @@
+基础问题索引
+================
+
+shell中"2>&1" 是什么意思？
+
+https://stackoverflow.com/questions/818255/what-does-21-mean
+
+
+shell中"$@" 是什么意思？
+
+https://stackoverflow.com/questions/9994295/what-does-mean-in-a-shell-script
+
+
+
+sehll中"if [ -t 1 ]"和"if [ -t 2 ]"是什么意思？
+
+https://unix.stackexchange.com/questions/162839/how-can-a-bash-script-tell-how-it-was-run
+
