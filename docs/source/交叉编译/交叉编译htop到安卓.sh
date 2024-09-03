@@ -1,8 +1,9 @@
-export TARGET_INSTALL_PREFIX=`mktemp -d /tmp/htop.XXXXXX`
-cd $TARGET_INSTALL_PREFIX
+export TEMP_DIR=`mktemp -d /tmp/htop.XXXXXX`
+cd $TEMP_DIR
 git clone https://github.com/mirror/ncurses.git -b v6.4 --depth 1
 git clone https://github.com/htop-dev/htop.git -b 3.3.0 --depth 1
-
+export TARGET_INSTALL_PREFIX=$TARGET_INSTALL_PREFIX/dist
+mkdir -p $TARGET_INSTALL_PREFIX
 
 # NDK编译
 # 参考: https://developer.android.com/ndk/guides/other_build_systems?hl=zh-cn

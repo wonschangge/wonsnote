@@ -1,0 +1,89 @@
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-A%20Processor/Cortex-A5.svg
+  dir=Cortex-A
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-A%20Processor/Cortex-A7.svg
+  dir=Cortex-A
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-A%20Processor/Cortex-A32.svg
+  dir=Cortex-A
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-A%20Processor/Cortex-A34.svg
+  dir=Cortex-A
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-A%20Processor/Cortex-A35.svg
+  dir=Cortex-A
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-A%20Processor/Cortex-A53.svg
+  dir=Cortex-A
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-A%20Processor/Cortex-A55.svg
+  dir=Cortex-A
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-A%20Processor/Cortex-A65.svg
+  dir=Cortex-A
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-A%20Processor/Cortex-A65AE.svg
+  dir=Cortex-A
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-A%20Processor/Cortex-A72.svg
+  dir=Cortex-A
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-A%20Processor/Cortex-A73.svg
+  dir=Cortex-A
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-A%20Processor/Cortex-A75.svg
+  dir=Cortex-A
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-A%20Processor/Cortex-A76AE.svg
+  dir=Cortex-A
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-A%20Processor/Cortex-A76.svg
+  dir=Cortex-A
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-A%20Processor/Cortex-A77.svg
+  dir=Cortex-A
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-A%20Processor/Cortex-A78AE.svg
+  dir=Cortex-A
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-A%20Processor/Cortex-A78C.svg
+  dir=Cortex-A
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-A%20Processor/Cortex-A78.svg
+  dir=Cortex-A
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-A%20Processor/Cortex-A510.svg
+  dir=Cortex-A
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-A%20Processor/Cortex-A520.svg
+  dir=Cortex-A
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-A%20Processor/Cortex-A520AE.svg
+  dir=Cortex-A
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-A%20Processor/Cortex-A710.svg
+  dir=Cortex-A
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-A%20Processor/Cortex-A715.svg
+  dir=Cortex-A
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-A%20Processor/Cortex-A720.svg
+  dir=Cortex-A
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-A%20Processor/Cortex-A720AE.svg
+  dir=Cortex-A
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-A%20Processor/Cortex-A725.svg
+  dir=Cortex-A
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-R%20Processor/Cortex-R5.png
+  dir=Cortex-R
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-R%20Processor/Cortex-R8.svg
+  dir=Cortex-R
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-R%20Processor/Cortex-R52-Plus.svg
+  dir=Cortex-R
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-R%20Processor/Cortex-R52.svg
+  dir=Cortex-R
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-R%20Processor/Cortex-R82.svg
+  dir=Cortex-R
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-R%20Processor/Cortex-R82AE.svg
+  dir=Cortex-R
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-M%20Processor/Cortex-M0.svg
+  dir=Cortex-M
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-M%20Processor/Cortex-M0plus.svg
+  dir=Cortex-M
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-M%20Processor/Cortex-M1.svg
+  dir=Cortex-M
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-M%20Processor/Cortex-M3.svg
+  dir=Cortex-M
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-M%20Processor/Cortex-M4.svg
+  dir=Cortex-M
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-M%20Processor/Cortex-M7.svg
+  dir=Cortex-M
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-M%20Processor/Cortex-M23.svg
+  dir=Cortex-M
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-M%20Processor/Cortex-M33.svg
+  dir=Cortex-M
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-M%20Processor/Cortex-M35P.svg
+  dir=Cortex-M
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-M%20Processor/Cortex-M52.svg
+  dir=Cortex-M
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-M%20Processor/Cortex-M55.svg
+  dir=Cortex-M
+https://www.arm.com/-/media/Arm%20Developer%20Community/Images/Block%20Diagrams/Cortex-M%20Processor/Arm-Cortex-M85-Block-Diagram_V3.png
+  dir=Cortex-M
+  out=Cortex-M85.png

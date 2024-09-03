@@ -1,0 +1,22 @@
+如何编译不带版本号的动态库
+======================================
+
+CMAKE方式
+--------------------------------------
+
+许多基础库做了对安卓平台适配, 在编译出的动态库中不去带有版本号, 参见 opencv 中的工作方式:
+
+
+::
+
+    # For dynamic link numbering conventions
+    if(NOT ANDROID)
+        # Android SDK build scripts can include only .so files into final .apk
+        # As result we should not set version properties for Android
+        set_target_properties(${the_module} PROPERTIES
+            VERSION ${OPENCV_LIBVERSION}
+            SOVERSION ${OPENCV_SOVERSION}
+        )
+    endif()
+
+据此反推及实验知，只要在 CMAKE 编译中不去进行 VERSION，SOVERSION 的配置，就不会生成带版本号的动态库。

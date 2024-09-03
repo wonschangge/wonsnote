@@ -1,0 +1,16 @@
+芝加哥洛约拉大学
+=====================
+
+分布式系统 https://ds.cs.luc.edu/index.html
+
+COMP 335/488-001： 软件工程中的形式化方法
+讲义：https://lucformalmethodscourse.github.io/index.html
+
+COMP 371/471： 编程语言理论（与实践）
+讲义：https://lucproglangcourse.github.io/index.html
+
+UnoAPI：使用 SYCL 和 oneAPI 进行现代并行 C++ 编程¶
+https://unoapi.org/index.html
+
+纵向项目状态徽章
+https://github.com/klaeufer/sparkbadge

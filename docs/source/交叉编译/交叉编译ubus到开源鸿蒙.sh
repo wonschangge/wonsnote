@@ -1,5 +1,5 @@
-export TARGET_INSTALL_PREFIX=`mktemp -d /tmp/ubus-dev.XXXXXX`
-cd $TARGET_INSTALL_PREFIX
+export TEMP_DIR=`mktemp -d /tmp/ubus-dev.XXXXXX`
+cd $TEMP_DIR
 git clone --depth=1 https://github.com/json-c/json-c.git
 git clone --depth=1 https://github.com/openwrt/libubox.git
 git clone --depth=1 https://github.com/openwrt/ubus.git
@@ -10,16 +10,46 @@ mkdir -p build/{json-c,libubox,ubus}
 DIST_PATH=$PWD/dist
 mkdir -p $DIST_PATH
 
+export SDK=$HOME/x-tools/arm-unknown-linux-musleabi
+export PATH=$SDK/bin:$PATH
+export CFLAGS=-I$SDK/include
+export LDFLAGS=-L$SDK/lib
+export SYSROOT=$SDK/arm-unknown-linux-musleabi/sysroot
+export TARGET=x86_64-linux-android
+export CC=arm-unknown-linux-musleabi-gcc
+export CXX=arm-unknown-linux-musleabi-g++
+export AR=arm-unknown-linux-musleabi-ar
+export AS=arm-unknown-linux-musleabi-as
+export LD=arm-unknown-linux-musleabi-ld
+export RANLIB=arm-unknown-linux-musleabi-ranlib
+export STRIP=arm-unknown-linux-musleabi-strip
+
+cd json-c
+echo 'diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 5015408..282c48e 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -469,9 +469,9 @@ add_library(${PROJECT_NAME}
+     ${JSON_C_SOURCES}
+     ${JSON_C_HEADERS}
+ )
+-set_target_properties(${PROJECT_NAME} PROPERTIES
+-    VERSION 5.3.0
+-    SOVERSION 5)
++# set_target_properties(${PROJECT_NAME} PROPERTIES
++#     VERSION 5.3.0
++#     SOVERSION 5)
+ list(APPEND CMAKE_TARGETS ${PROJECT_NAME})
+ # If json-c is used as subroject it set to target correct interface -I flags and allow
+ # to build external target without extra include_directories(...)' | git apply
+cd -
+
 cd build/json-c
 cmake ../../json-c \
-    -DCMAKE_SYSTEM_NAME=Android \
-    -DCMAKE_SYSTEM_VERSION=34 \
-    -DCMAKE_ANDROID_ARCH_ABI=x86_64 \
-    -DCMAKE_ANDROID_NDK=${HOME}/Android/Sdk/ndk/26.3.11579264/ \
     -DCMAKE_INSTALL_PREFIX=$DIST_PATH
 make -j${nproc}
 make install
-cd ../..
+cd -
 
 cd libubox
 echo 'diff --git a/udebug.c b/udebug.c
@@ -52,14 +82,10 @@ index e39a32c..46b92d4 100644
  
  		if (fd < 0 && errno != EEXIST)
  			return -1;' | git apply
-cd ..
+cd -
 
 cd build/libubox
 cmake ../../libubox \
-    -DCMAKE_SYSTEM_NAME=Android \
-    -DCMAKE_SYSTEM_VERSION=34 \
-    -DCMAKE_ANDROID_ARCH_ABI=x86_64 \
-    -DCMAKE_ANDROID_NDK=${HOME}/Android/Sdk/ndk/26.3.11579264/ \
     -DCMAKE_INSTALL_PREFIX=$DIST_PATH \
     -DCMAKE_FIND_ROOT_PATH=$DIST_PATH \
     -DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY \
@@ -69,7 +95,7 @@ cmake ../../libubox \
     -DBUILD_EXAMPLES=ON
 make -j${nproc}
 make install
-cd ../..
+cd -
 
 cd ubus
 echo 'diff --git a/CMakeLists.txt b/CMakeLists.txt
@@ -104,16 +130,11 @@ index 81f9997..ddda050 100644
 +		RUNTIME DESTINATION sbin
 +	)
  ENDIF()' | git apply
-cd ..
+cd -
 
 cd build/ubus
 cmake ../../ubus \
-    --log-level=VERBOSE \
     -DCMAKE_C_FLAGS=-I$DIST_PATH/include \
-    -DCMAKE_SYSTEM_NAME=Android \
-    -DCMAKE_SYSTEM_VERSION=34 \
-    -DCMAKE_ANDROID_ARCH_ABI=x86_64 \
-    -DCMAKE_ANDROID_NDK=${HOME}/Android/Sdk/ndk/26.3.11579264/ \
     -DCMAKE_INSTALL_PREFIX=$DIST_PATH \
     -DCMAKE_FIND_ROOT_PATH=$DIST_PATH \
     -DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY \
@@ -128,8 +149,4 @@ make -j${nproc}
 make install
 
 # TARGET_DIR=/data/local/tmp/ubus-dev
-# adb push dist/bin/ubus dist/sbin/{client,server,ubusd} dist/lib/{libjson-c.so,libubus.so,libblobmsg_json.so,libubox.so} $TARGET_DIR
-# adb shell LD_LIBRARY_PATH=$TARGET_DIR $TARGET_DIR/ubusd &
-# adb shell LD_LIBRARY_PATH=$TARGET_DIR $TARGET_DIR/server &
-# adb shell LD_LIBRARY_PATH=$TARGET_DIR $TARGET_DIR/client
-# adb shell LD_LIBRARY_PATH=$TARGET_DIR $TARGET_DIR/ubus monitor
+# cp dist/bin/ubus dist/sbin/{client,server,ubusd} dist/lib/{libjson-c.so,libubus.so,libblobmsg_json.so,libubox.so} <ftpdir>

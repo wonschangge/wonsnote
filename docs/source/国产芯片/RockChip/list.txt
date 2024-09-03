@@ -1,0 +1,12 @@
+#https://www.96rocks.com/img/blog/introduce-rk3568/rk3568_block_diagram.png
+#  dir=RK
+#  out=RK3568.png
+#https://forlinx.net/file.php?f=202301/f_c6c35a47b99d907b8e5fbfa1f4cb6f58&t=png&o=&s=&v=1672912662
+#  dir=RK
+#  out=RK3588.png
+#https://opensource.rock-chips.com/wiki_File:RK3399_Block_Diagram.png
+#  dir=RK
+#  out=RK3399.png
+https://www.scensmart.com/wp-content/uploads/2020/09/RV1126.png
+  dir=RV
+  out=RV1126.png

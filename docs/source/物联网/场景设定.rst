@@ -1,0 +1,14 @@
+场景设定
+==============
+
+客户端对不同场景进行定制，如改变UI。
+
+1. MUSIC: 音乐
+2. VIDEO: 视频
+3. STATION: 电台
+4. TRANSLATION: 翻译
+5. VOICE: 声音
+6. CALCULATION: 计算
+7. OPEN_PLATFORM: 开放平台
+8. MULTI_DOMAIN: 多领域
+9. MIOT: 智能设备控制

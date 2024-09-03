@@ -1,0 +1,9 @@
+连接保持
+==================
+
+服务保持
+为了保持物理连接不断，设备端会每隔一段时间便向服务器发送一次 Ping，若
+服务器正常返回 Pong 消息，则物理连接保持；否则设备端应该立即关闭当前的
+物理连接，建立新的连接。
+
+参考: 如何在 javascript 中实现 webSocket 连接活动的 Ping/Pong 请求？[关闭] https://stackoverflow.com/questions/50876766/how-to-implement-ping-pong-request-for-websocket-connection-alive-in-javascript
