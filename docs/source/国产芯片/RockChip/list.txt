@@ -7,6 +7,20 @@
 #https://opensource.rock-chips.com/wiki_File:RK3399_Block_Diagram.png
 #  dir=RK
 #  out=RK3399.png
-https://www.scensmart.com/wp-content/uploads/2020/09/RV1126.png
-  dir=RV
-  out=RV1126.png
+#https://www.scensmart.com/wp-content/uploads/2020/09/RV1126.png
+#  dir=RV
+#  out=RV1126.png
+#https://www.rock-chips.com/uploads/pdf/2022.8.26/192/RV1109%20Brief%20Datasheet.pdf
+#  dir=pdf
+#https://www.rock-chips.com/uploads/pdf/2022.8.26/192/RV1126%20Brief%20Datasheet.pdf
+#  dir=pdf
+#https://www.rock-chips.com/uploads/pdf/2022.8.26/192/RK3566%20Brief%20Datasheet.pdf
+#  dir=pdf
+#https://www.rock-chips.com/uploads/pdf/2022.8.26/192/RK3568%20Brief%20Datasheet.pdf
+#  dir=pdf
+#https://www.rock-chips.com/uploads/pdf/2022.8.26/192/RK3588%20Brief%20Datasheet.pdf
+#  dir=pdf
+#https://www.rock-chips.com/uploads/pdf/2024.3.18/192/RK3576%20Brief%20Datasheet%20V1.2-20240311.pdf
+#  dir=pdf
+#https://www.rock-chips.com/uploads/pdf/2022.8.26/192/RV1106%20Brief%20Datasheet.pdf
+#  dir=pdf
