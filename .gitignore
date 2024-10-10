@@ -157,3 +157,5 @@ cython_debug/
 
 docs/source/_build
 docs/source/html
+
+pyvenv.cfg
