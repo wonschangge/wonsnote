@@ -1,0 +1,118 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ALLDOCS	.venv/lib/python3.11/site-packages/sphinx/templates/texinfo/Makefile	/^ALLDOCS = $(basename $(wildcard *.texi))$/;"	m
+ALLDOCS	.venv/lib64/python3.11/site-packages/sphinx/templates/texinfo/Makefile	/^ALLDOCS = $(basename $(wildcard *.texi))$/;"	m
+BACKLOG	docs/source/html/_downloads/e808b61a03e11c99062b5066191c959a/unix_server_socket.c	9;"	d	file:
+BACKLOG	docs/source/嵌入式/Linux/res/uds/unix_server_socket.c	9;"	d	file:
+BUF_SIZE	docs/source/html/_downloads/07303d521945fc1c285d1e647c86ab4f/error_functions.c	68;"	d	file:
+BUF_SIZE	docs/source/html/_downloads/39b346b3fcfb2743292f512a5437ab7c/unix_socket.h	4;"	d
+BUF_SIZE	docs/source/嵌入式/Linux/res/uds/error_functions.c	68;"	d	file:
+BUF_SIZE	docs/source/嵌入式/Linux/res/uds/unix_socket.h	4;"	d
+BUILDDIR	docs/Makefile	/^BUILDDIR      = build$/;"	m
+Boolean	docs/source/html/_downloads/07303d521945fc1c285d1e647c86ab4f/error_functions.c	/^typedef enum { FALSE, TRUE } Boolean;$/;"	t	typeref:enum:__anon1	file:
+Boolean	docs/source/嵌入式/Linux/res/uds/error_functions.c	/^typedef enum { FALSE, TRUE } Boolean;$/;"	t	typeref:enum:__anon2	file:
+DO_ESCAPE	.venv/lib/python3.11/site-packages/markupsafe/_speedups.c	35;"	d	file:
+DO_ESCAPE	.venv/lib64/python3.11/site-packages/markupsafe/_speedups.c	35;"	d	file:
+ERROR_FUNCTIONS_H	docs/source/html/_downloads/f6cc4d88c47e84bf4a5ee3a28a660c49/error_functions.h	18;"	d
+ERROR_FUNCTIONS_H	docs/source/嵌入式/Linux/res/uds/error_functions.h	18;"	d
+FALSE	docs/source/html/_downloads/07303d521945fc1c285d1e647c86ab4f/error_functions.c	/^typedef enum { FALSE, TRUE } Boolean;$/;"	e	enum:__anon1	file:
+FALSE	docs/source/html/_downloads/07303d521945fc1c285d1e647c86ab4f/error_functions.c	29;"	d	file:
+FALSE	docs/source/嵌入式/Linux/res/uds/error_functions.c	/^typedef enum { FALSE, TRUE } Boolean;$/;"	e	enum:__anon2	file:
+FALSE	docs/source/嵌入式/Linux/res/uds/error_functions.c	29;"	d	file:
+GET_DELTA	.venv/lib/python3.11/site-packages/markupsafe/_speedups.c	20;"	d	file:
+GET_DELTA	.venv/lib64/python3.11/site-packages/markupsafe/_speedups.c	20;"	d	file:
+INSTALL_INFO	.venv/lib/python3.11/site-packages/sphinx/templates/texinfo/Makefile	/^INSTALL_INFO = install-info$/;"	m
+INSTALL_INFO	.venv/lib64/python3.11/site-packages/sphinx/templates/texinfo/Makefile	/^INSTALL_INFO = install-info$/;"	m
+MAKEINFO	.venv/lib/python3.11/site-packages/sphinx/templates/texinfo/Makefile	/^MAKEINFO = makeinfo --no-split$/;"	m
+MAKEINFO	.venv/lib64/python3.11/site-packages/sphinx/templates/texinfo/Makefile	/^MAKEINFO = makeinfo --no-split$/;"	m
+MAKEINFO_html	.venv/lib/python3.11/site-packages/sphinx/templates/texinfo/Makefile	/^MAKEINFO_html = makeinfo --no-split --html$/;"	m
+MAKEINFO_html	.venv/lib64/python3.11/site-packages/sphinx/templates/texinfo/Makefile	/^MAKEINFO_html = makeinfo --no-split --html$/;"	m
+MAKEINFO_plaintext	.venv/lib/python3.11/site-packages/sphinx/templates/texinfo/Makefile	/^MAKEINFO_plaintext = makeinfo --no-split --plaintext$/;"	m
+MAKEINFO_plaintext	.venv/lib64/python3.11/site-packages/sphinx/templates/texinfo/Makefile	/^MAKEINFO_plaintext = makeinfo --no-split --plaintext$/;"	m
+NORETURN	docs/source/html/_downloads/f6cc4d88c47e84bf4a5ee3a28a660c49/error_functions.h	30;"	d
+NORETURN	docs/source/html/_downloads/f6cc4d88c47e84bf4a5ee3a28a660c49/error_functions.h	32;"	d
+NORETURN	docs/source/嵌入式/Linux/res/uds/error_functions.h	30;"	d
+NORETURN	docs/source/嵌入式/Linux/res/uds/error_functions.h	32;"	d
+PyInit__speedups	.venv/lib/python3.11/site-packages/markupsafe/_speedups.c	/^PyInit__speedups(void)$/;"	f
+PyInit__speedups	.venv/lib64/python3.11/site-packages/markupsafe/_speedups.c	/^PyInit__speedups(void)$/;"	f
+SOURCEDIR	docs/Makefile	/^SOURCEDIR     = source$/;"	m
+SPHINXBUILD	docs/Makefile	/^SPHINXBUILD   ?= sphinx-build$/;"	m
+SPHINXOPTS	docs/Makefile	/^SPHINXOPTS    ?=$/;"	m
+SV_SOCK_PATH	docs/source/html/_downloads/39b346b3fcfb2743292f512a5437ab7c/unix_socket.h	5;"	d
+SV_SOCK_PATH	docs/source/嵌入式/Linux/res/uds/unix_socket.h	5;"	d
+TEXI2PDF	.venv/lib/python3.11/site-packages/sphinx/templates/texinfo/Makefile	/^TEXI2PDF = texi2pdf --batch --expand$/;"	m
+TEXI2PDF	.venv/lib64/python3.11/site-packages/sphinx/templates/texinfo/Makefile	/^TEXI2PDF = texi2pdf --batch --expand$/;"	m
+TRUE	docs/source/html/_downloads/07303d521945fc1c285d1e647c86ab4f/error_functions.c	/^typedef enum { FALSE, TRUE } Boolean;$/;"	e	enum:__anon1	file:
+TRUE	docs/source/html/_downloads/07303d521945fc1c285d1e647c86ab4f/error_functions.c	25;"	d	file:
+TRUE	docs/source/嵌入式/Linux/res/uds/error_functions.c	/^typedef enum { FALSE, TRUE } Boolean;$/;"	e	enum:__anon2	file:
+TRUE	docs/source/嵌入式/Linux/res/uds/error_functions.c	25;"	d	file:
+__KERNEL__	docs/source/内核/res/list/linux_list.c	24;"	d	file:
+c	docs/source/内核/res/list/bsd_list.c	/^    char c;$/;"	m	struct:type	file:
+c	docs/source/内核/res/list/linux_list.c	/^    char c;$/;"	m	struct:type	file:
+cmdLineErr	docs/source/html/_downloads/07303d521945fc1c285d1e647c86ab4f/error_functions.c	/^cmdLineErr(const char *format, ...)$/;"	f
+cmdLineErr	docs/source/嵌入式/Linux/res/uds/error_functions.c	/^cmdLineErr(const char *format, ...)$/;"	f
+create_threads	docs/source/prctl/PR_SET_NAME.c	/^void create_threads() {$/;"	f
+doChild	docs/source/prctl/PR_SET_CHILD_SUBREAPER.c	/^int doChild(void) {$/;"	f
+doGrandchild	docs/source/prctl/PR_SET_CHILD_SUBREAPER.c	/^int doGrandchild(void) {$/;"	f
+errExit	docs/source/html/_downloads/07303d521945fc1c285d1e647c86ab4f/error_functions.c	/^errExit(const char *format, ...)$/;"	f
+errExit	docs/source/嵌入式/Linux/res/uds/error_functions.c	/^errExit(const char *format, ...)$/;"	f
+errExitEN	docs/source/html/_downloads/07303d521945fc1c285d1e647c86ab4f/error_functions.c	/^errExitEN(int errnum, const char *format, ...)$/;"	f
+errExitEN	docs/source/嵌入式/Linux/res/uds/error_functions.c	/^errExitEN(int errnum, const char *format, ...)$/;"	f
+errMsg	docs/source/html/_downloads/07303d521945fc1c285d1e647c86ab4f/error_functions.c	/^errMsg(const char *format, ...)$/;"	f
+errMsg	docs/source/嵌入式/Linux/res/uds/error_functions.c	/^errMsg(const char *format, ...)$/;"	f
+err_exit	docs/source/html/_downloads/07303d521945fc1c285d1e647c86ab4f/error_functions.c	/^err_exit(const char *format, ...)$/;"	f
+err_exit	docs/source/嵌入式/Linux/res/uds/error_functions.c	/^err_exit(const char *format, ...)$/;"	f
+escape	.venv/lib/python3.11/site-packages/markupsafe/_speedups.c	/^escape(PyObject *self, PyObject *text)$/;"	f	file:
+escape	.venv/lib64/python3.11/site-packages/markupsafe/_speedups.c	/^escape(PyObject *self, PyObject *text)$/;"	f	file:
+escape_silent	.venv/lib/python3.11/site-packages/markupsafe/_speedups.c	/^escape_silent(PyObject *self, PyObject *text)$/;"	f	file:
+escape_silent	.venv/lib64/python3.11/site-packages/markupsafe/_speedups.c	/^escape_silent(PyObject *self, PyObject *text)$/;"	f	file:
+escape_unicode	.venv/lib/python3.11/site-packages/markupsafe/_speedups.c	/^escape_unicode(PyUnicodeObject *in)$/;"	f	file:
+escape_unicode	.venv/lib64/python3.11/site-packages/markupsafe/_speedups.c	/^escape_unicode(PyUnicodeObject *in)$/;"	f	file:
+escape_unicode_kind1	.venv/lib/python3.11/site-packages/markupsafe/_speedups.c	/^escape_unicode_kind1(PyUnicodeObject *in)$/;"	f	file:
+escape_unicode_kind1	.venv/lib64/python3.11/site-packages/markupsafe/_speedups.c	/^escape_unicode_kind1(PyUnicodeObject *in)$/;"	f	file:
+escape_unicode_kind2	.venv/lib/python3.11/site-packages/markupsafe/_speedups.c	/^escape_unicode_kind2(PyUnicodeObject *in)$/;"	f	file:
+escape_unicode_kind2	.venv/lib64/python3.11/site-packages/markupsafe/_speedups.c	/^escape_unicode_kind2(PyUnicodeObject *in)$/;"	f	file:
+escape_unicode_kind4	.venv/lib/python3.11/site-packages/markupsafe/_speedups.c	/^escape_unicode_kind4(PyUnicodeObject *in)$/;"	f	file:
+escape_unicode_kind4	.venv/lib64/python3.11/site-packages/markupsafe/_speedups.c	/^escape_unicode_kind4(PyUnicodeObject *in)$/;"	f	file:
+fatal	docs/source/html/_downloads/07303d521945fc1c285d1e647c86ab4f/error_functions.c	/^fatal(const char *format, ...)$/;"	f
+fatal	docs/source/嵌入式/Linux/res/uds/error_functions.c	/^fatal(const char *format, ...)$/;"	f
+header	docs/source/内核/res/list/linux_list.c	/^struct list_head header;$/;"	v	typeref:struct:list_head
+infodir	.venv/lib/python3.11/site-packages/sphinx/templates/texinfo/Makefile	/^infodir ?= \/usr\/share\/info$/;"	m
+infodir	.venv/lib64/python3.11/site-packages/sphinx/templates/texinfo/Makefile	/^infodir ?= \/usr\/share\/info$/;"	m
+init_constants	.venv/lib/python3.11/site-packages/markupsafe/_speedups.c	/^init_constants(void)$/;"	f	file:
+init_constants	.venv/lib64/python3.11/site-packages/markupsafe/_speedups.c	/^init_constants(void)$/;"	f	file:
+list	docs/source/内核/res/list/linux_list.c	/^    struct list_head  list;$/;"	m	struct:type	typeref:struct:type::list_head	file:
+main	docs/source/html/_downloads/6200e7c22949e630c1125e4a5b9f2725/unix_client_socket.c	/^int main(int argc, char *argv[]) {$/;"	f
+main	docs/source/html/_downloads/e808b61a03e11c99062b5066191c959a/unix_server_socket.c	/^int main(int argc, char *argv[]) {$/;"	f
+main	docs/source/prctl/PR_SET_CHILD_SUBREAPER.c	/^int main(void) {$/;"	f
+main	docs/source/prctl/PR_SET_NAME.c	/^int main() {$/;"	f
+main	docs/source/prctl/PR_SET_PDEATHSIG.c	/^int main()$/;"	f
+main	docs/source/内核/res/list/bsd_list.c	/^int main()$/;"	f
+main	docs/source/内核/res/list/linux_list.c	/^int main()$/;"	f
+main	docs/source/嵌入式/Linux/res/uds/unix_client_socket.c	/^int main(int argc, char *argv[]) {$/;"	f
+main	docs/source/嵌入式/Linux/res/uds/unix_server_socket.c	/^int main(int argc, char *argv[]) {$/;"	f
+markup	.venv/lib/python3.11/site-packages/markupsafe/_speedups.c	/^static PyObject* markup;$/;"	v	file:
+markup	.venv/lib64/python3.11/site-packages/markupsafe/_speedups.c	/^static PyObject* markup;$/;"	v	file:
+module_definition	.venv/lib/python3.11/site-packages/markupsafe/_speedups.c	/^static struct PyModuleDef module_definition = {$/;"	v	typeref:struct:PyModuleDef	file:
+module_definition	.venv/lib64/python3.11/site-packages/markupsafe/_speedups.c	/^static struct PyModuleDef module_definition = {$/;"	v	typeref:struct:PyModuleDef	file:
+module_methods	.venv/lib/python3.11/site-packages/markupsafe/_speedups.c	/^static PyMethodDef module_methods[] = {$/;"	v	file:
+module_methods	.venv/lib64/python3.11/site-packages/markupsafe/_speedups.c	/^static PyMethodDef module_methods[] = {$/;"	v	file:
+name	docs/source/内核/res/list/bsd_list.c	/^char *name = "YafangShao";$/;"	v
+name	docs/source/内核/res/list/linux_list.c	/^char *name = "YafangShao";$/;"	v
+outputError	docs/source/html/_downloads/07303d521945fc1c285d1e647c86ab4f/error_functions.c	/^outputError(Boolean useErr, int err, Boolean flushStdout,$/;"	f	file:
+outputError	docs/source/嵌入式/Linux/res/uds/error_functions.c	/^outputError(Boolean useErr, int err, Boolean flushStdout,$/;"	f	file:
+sigusr1_handler	docs/source/prctl/PR_SET_PDEATHSIG.c	/^void sigusr1_handler(int dummy)$/;"	f
+soft_str	.venv/lib/python3.11/site-packages/markupsafe/_speedups.c	/^soft_str(PyObject *self, PyObject *s)$/;"	f	file:
+soft_str	.venv/lib64/python3.11/site-packages/markupsafe/_speedups.c	/^soft_str(PyObject *self, PyObject *s)$/;"	f	file:
+terminate	docs/source/html/_downloads/07303d521945fc1c285d1e647c86ab4f/error_functions.c	/^terminate(Boolean useExit3)$/;"	f	file:
+terminate	docs/source/嵌入式/Linux/res/uds/error_functions.c	/^terminate(Boolean useExit3)$/;"	f	file:
+thread1	docs/source/prctl/PR_SET_NAME.c	/^void* thread1() {$/;"	f
+type	docs/source/内核/res/list/bsd_list.c	/^struct type{$/;"	s	file:
+type	docs/source/内核/res/list/linux_list.c	/^struct type {$/;"	s	file:
+usageErr	docs/source/html/_downloads/07303d521945fc1c285d1e647c86ab4f/error_functions.c	/^usageErr(const char *format, ...)$/;"	f
+usageErr	docs/source/嵌入式/Linux/res/uds/error_functions.c	/^usageErr(const char *format, ...)$/;"	f
+waitDescendents	docs/source/prctl/PR_SET_CHILD_SUBREAPER.c	/^void waitDescendents(void) {$/;"	f

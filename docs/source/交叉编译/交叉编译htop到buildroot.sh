@@ -5,19 +5,19 @@ git clone https://github.com/htop-dev/htop.git -b 3.3.0 --depth 1
 export TARGET_INSTALL_PREFIX=$PWD/dist
 mkdir -p $TARGET_INSTALL_PREFIX
 
-export SDK=$HOME/x-tools/arm-unknown-linux-musleabi
+export SDK=$HOME/x-tools/aarch64-rpi4-linux-gnu
 export PATH=$SDK/bin:$PATH
 export CFLAGS=-I$SDK/include
 export LDFLAGS=-L$SDK/lib
-export SYSROOT=$SDK/arm-unknown-linux-musleabi/sysroot
+export SYSROOT=$SDK/aarch64-rpi4-linux-gnu/sysroot
 export TARGET=x86_64-linux-android
-export CC=arm-unknown-linux-musleabi-gcc
-export CXX=arm-unknown-linux-musleabi-g++
-export AR=arm-unknown-linux-musleabi-ar
-export AS=arm-unknown-linux-musleabi-as
-export LD=arm-unknown-linux-musleabi-ld
-export RANLIB=arm-unknown-linux-musleabi-ranlib
-export STRIP=arm-unknown-linux-musleabi-strip
+export CC=aarch64-rpi4-linux-gnu-gcc
+export CXX=aarch64-rpi4-linux-gnu-g++
+export AR=aarch64-rpi4-linux-gnu-ar
+export AS=aarch64-rpi4-linux-gnu-as
+export LD=aarch64-rpi4-linux-gnu-ld
+export RANLIB=aarch64-rpi4-linux-gnu-ranlib
+export STRIP=aarch64-rpi4-linux-gnu-strip
 
 
 # --with-shlib-version=rel 对应 realink, 有大版本号和小版本号

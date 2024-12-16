@@ -1,0 +1,9 @@
+多核异构相关
+=====================
+
+多核异构核间通信–ipcc - STM32MP157 Pro开发板
+https://doc.embedfire.com/linux/stm32mp1/driver/zh/latest/linux_driver/framework_ipcc.html
+
+RTOS 异构多核通信 - Sunxi
+https://r128.docs.aw-ol.com/sdk_base/amp/#sunxi-amp_2
+

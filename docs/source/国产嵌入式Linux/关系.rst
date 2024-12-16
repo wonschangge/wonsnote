@@ -1,0 +1,23 @@
+
+
+
+
+
+
+
+* 湖南大学嵌入式实验室: 国内Zephyr项目的中坚力量
+* 麒麟信安: 做openEuler Embedded的解决方案\/发行版
+
+
+
+
+
+基于openEuler Embedded的麒麟新安嵌入式操作系统及应用实践_邱文博_麒麟信安
+Zephyr RTOS软硬件适配与ZVM虚拟化技术_谢国琪_湖大嵌入式计算省重点实验室主任
+openEuler Embedded支持RISC-V体系架构_于佳耕_中科院软件所
+openEuler LLVM平行宇宙计划及技术分享_赵川峰_openEulerCompilerSigMaintainer
+编译系统针对RISC-V架构的CodeSize优化_王峰_湖大
+
+
+* z\/VM: 作为控制程序，z/Virtual Machine （z/VM）® 是一个虚拟机管理程序，因为它在自己创建的虚拟机中运行其他操作系统。任何 IBM® 大型机 z/OS、® Linux for zSeries®、z®/VSE™ 和 z/TPF 等操作系统可以作为 guest 运行 系统，而 z/VM 可以运行来宾系统的任意组合。z/VM 具有 两个基本组件：一个控制程序 （CP） 和一个单用户操作系统CMS。控制程序人为创建多个虚拟机 来自真实的硬件资源。对于最终用户来说，他们似乎已经专用地使用共享的真实资源。共享的实际资源包括打印机、磁盘存储设备和 CPU。控制程序确保数据以及来宾系统之间的应用程序安全性。真正的硬件可以是在来宾之间共享，或出于性能原因专用于单个来宾。系统程序员在 Guest 之间分配真实设备。对于大多数客户，使用 Guest 系统可避免对更大的硬件配置的需求。z/VM 的另一个主要组件是 Conversational Monitor System 或 CMS 的。z/VM 的此组件在虚拟机中运行，并提供交互式终端用户界面和通用 z/VM 应用程序编程接口。https://www.ibm.com/docs/en/zos-basic-skills?topic=systems-mainframe-operating-system-zvm
+
